@@ -1,6 +1,7 @@
 import numpy as np 
 from helper import *
 import matplotlib.pyplot as plt
+from pylab import norm
 
 '''
 Homework1: perceptron classifier
@@ -65,8 +66,6 @@ def perceptron(data, label, max_iter, learning_rate):
         t = 0; w = np.zeros((1,3))
         while t < max_iter:
                 for data_index, data_val in enumerate(data):
-                        #data_index = np.random.randint(0, len(data))
-                        #data_val = data[data_index]
                         if sign(np.dot(w[0], data_val)) != label[data_index]:   # Misclassified Item
                                 w += learning_rate * label[data_index] * data_val
                 t += 1
@@ -74,18 +73,25 @@ def perceptron(data, label, max_iter, learning_rate):
 
 
 def show_result(data, label, w):
-	'''
-	This function is used for plot the test data with the separators and save it.
-	
-	Args:
-	data: test features with shape (424, 2). The shape represents total 424 samples and 
-	each sample has 2 features.
-	label: test data's label with shape (424,1). 
-	1 for digit number 1 and -1 for digit number 5.
-	
-	Returns:
-	Do not return any arguments, just save the image you plot for your report.
-	'''
+        fig, ax = plt.subplots()
+        (symbols, colors) = assign_sym_col(label)
+        for _s, c, _x, _y in zip(symbols, colors, data[:,0], data[:,1]):
+                ax.scatter(_x, _y, s=50, marker=_s, c=c)
+        # overlay the linear separator
+        n = norm(w)
+        ww = w/n
+        ww1 = [ww[0][1], -ww[0][0]]
+        ww2 = [-ww[0][1], ww[0][0]]
+        plt.plot([ww1[0], ww2[0]],[ww1[1], ww2[1]],'--k')
+        '''
+        X = np.linspace(-1, 1, 0.01); Y = np.zeros(len(X))
+        line_slope = -w[0][1] / w[0][2]
+        for index in range(len(Y)):
+                Y[index] = line_slope * X[index]
+        plt.plot(X, Y, color='k', linewidth=2)
+        '''
+        plt.title('Test Data'); plt.xlabel('Symmetry Classifier'); plt.ylabel('Average Intensity')
+        plt.show()
 
 
 #-------------- Implement your code above ------------#

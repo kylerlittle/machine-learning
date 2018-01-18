@@ -21,42 +21,56 @@ def show_images(data):
 	Returns:
 	Do not return any arguments, just save the images you plot for your report.
 	'''
+        '''
         for index in range(len(data)):
                 imgplot = plt.imshow(data[index])
                 plt.show(imgplot)
                 # After each figure pops up, I save it for the report
+        '''
+
+                
+def assign_sym_col(label):
+        '''
+        This function assigns a red color & '*' symbole to labels '+1' (i.e. digit number 1) & a blue color & '+'
+        symbol to labels '-1' (i.e. digit number 5).
+
+        Args:
+        label: train data's label with shape (1561,1). 
+	1 for digit number 1 and -1 for digit number 5.
+
+        Returns:
+        A 2-tuple of two lists, each of length 1561
+        '''
+        symbols = []; colors = []
+        for val in label:
+                if val == 1:
+                        sym = '*'; col = 'red'
+                else:
+                        sym = '+'; col = 'blue'
+                symbols.append(sym); colors.append(col)
+        return (symbols, colors)
 
 
 def show_features(data, label):
-	'''
-	This function is used for plot a 2-D scatter plot of the features and save it. 
+        fig, ax = plt.subplots()
+        (symbols, colors) = assign_sym_col(label)
+        for _s, c, _x, _y in zip(symbols, colors, data[:][0], data[:][1]):
+                ax.scatter(_x, _y, s=50, marker=_s, c=c)
+        plt.title('Training Data'); plt.xlabel('Symmetry Classifier'); plt.ylabel('Average Intensity')
+        plt.show()
 
-	Args:
-	data: train features with shape (1561, 2). The shape represents total 1561 samples and 
-	      each sample has 2 features.
-	label: train data's label with shape (1561,1). 
-		   1 for digit number 1 and -1 for digit number 5.
-	
-	Returns:
-	Do not return any arguments, just save the 2-D scatter plot of the features you plot for your report.
-	'''
-
+        
 
 def perceptron(data, label, max_iter, learning_rate):
-	'''
-	The perceptron classifier function.
-
-	Args:
-	data: train data with shape (1561, 3), which means 1561 samples and 
-		  each sample has 3 features.(1, symmetry, average internsity)
-	label: train data's label with shape (1561,1). 
-		   1 for digit number 1 and -1 for digit number 5.
-	max_iter: max iteration numbers
-	learning_rate: learning rate for weight update
-	
-	Returns:
-		w: the seperater with shape (1, 3). You must initilize it with w = np.zeros((1,d))
-	'''
+        t = 0; w = np.zeros((1,3))
+        while t < max_iter:
+                for data_index, data_val in enumerate(data):
+                        #data_index = np.random.randint(0, len(data))
+                        #data_val = data[data_index]
+                        if sign(np.dot(w[0], data_val)) != label[data_index]:   # Misclassified Item
+                                w += learning_rate * label[data_index] * data_val
+                t += 1
+        return w
 
 
 def show_result(data, label, w):
@@ -65,9 +79,9 @@ def show_result(data, label, w):
 	
 	Args:
 	data: test features with shape (424, 2). The shape represents total 424 samples and 
-	      each sample has 2 features.
+	each sample has 2 features.
 	label: test data's label with shape (424,1). 
-		   1 for digit number 1 and -1 for digit number 5.
+	1 for digit number 1 and -1 for digit number 5.
 	
 	Returns:
 	Do not return any arguments, just save the image you plot for your report.

@@ -26,13 +26,13 @@ def test_accuracy():
 	learning_rate = [0.1, 0.2, 0.3, 0.5, 1.0]
 	result_lr = [(0.981, 0.962), (0.981, 0.962), (0.981, 0.962), (0.981, 0.962), (0.981, 0.962)]
 	for i, m_iter in enumerate(max_iter):
-		_, train_acc, test_acc = test_perceptron(m_iter, learning_rate[0])
+		train_acc, test_acc = test_perceptron(m_iter, learning_rate[0], 1)
 		if equal(train_acc, result_mi[i][0]) and equal(test_acc, result_mi[i][1]):
 			print("testcase%d passed"% (i+1))
 		else:
 			print("testcase%d failed"% (i+1))
 	for i, l_rate in enumerate(learning_rate):
-		_, train_acc, test_acc = test_perceptron(max_iter[2], l_rate)
+		train_acc, test_acc = test_perceptron(max_iter[2], l_rate, 2)
 		if equal(train_acc, result_lr[i][0]) and equal(test_acc, result_lr[i][1]):
 			print("testcase%d passed"% (i+len(max_iter)+1))
 		else:

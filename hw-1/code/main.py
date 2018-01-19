@@ -14,10 +14,10 @@ def play_with_data():
 
 def play_with_features():
 	#get data
-	traindataloc,testdataloc = "../data/train.txt", "../data/test.txt"
-	train_data,train_label = load_features(traindataloc)
+	traindataloc, testdataloc = "../data/train.txt", "../data/test.txt"
+	train_data, train_label = load_features(traindataloc)
 	test_data, test_label = load_features(testdataloc)
-	show_features(train_data[1:3],train_label)
+	show_features(train_data,train_label)
 
 
 def test_accuracy():

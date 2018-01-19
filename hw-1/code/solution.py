@@ -55,7 +55,7 @@ def assign_sym_col(label):
 def show_features(data, label):
         fig, ax = plt.subplots()
         (symbols, colors) = assign_sym_col(label)
-        for _s, c, _x, _y in zip(symbols, colors, data[:][0], data[:][1]):
+        for _s, c, _x, _y in zip(symbols, colors, data[:,1], data[:,2]):
                 ax.scatter(_x, _y, s=50, marker=_s, c=c)
         plt.title('Training Data'); plt.xlabel('Symmetry Classifier'); plt.ylabel('Average Intensity')
         plt.show()
@@ -74,22 +74,20 @@ def perceptron(data, label, max_iter, learning_rate):
 
 def show_result(data, label, w):
         fig, ax = plt.subplots()
+        # overlay the linear separator
+        X = data[:,0]
+        Y = np.zeros(len(X))
+        line_slope = -w[0][1] / w[0][2]; y_intercept = -w[0][0] / w[0][2]
+        for index in range(len(Y)):
+                Y[index] = (line_slope * X[index]) + y_intercept
+        ax.plot(X, Y, color='k', linewidth=2)
+        
         (symbols, colors) = assign_sym_col(label)
         for _s, c, _x, _y in zip(symbols, colors, data[:,0], data[:,1]):
                 ax.scatter(_x, _y, s=50, marker=_s, c=c)
-        # overlay the linear separator
-        n = norm(w)
-        ww = w/n
-        ww1 = [ww[0][1], -ww[0][0]]
-        ww2 = [-ww[0][1], ww[0][0]]
-        plt.plot([ww1[0], ww2[0]],[ww1[1], ww2[1]],'--k')
-        '''
-        X = np.linspace(-1, 1, 0.01); Y = np.zeros(len(X))
-        line_slope = -w[0][1] / w[0][2]
-        for index in range(len(Y)):
-                Y[index] = line_slope * X[index]
-        plt.plot(X, Y, color='k', linewidth=2)
-        '''
+
+        # Configure scaling, title, and xy labels
+        ax.set_xlim([X.min(), X.max()]); ax.set_ylim([-1., 0.2])
         plt.title('Test Data'); plt.xlabel('Symmetry Classifier'); plt.ylabel('Average Intensity')
         plt.show()
 

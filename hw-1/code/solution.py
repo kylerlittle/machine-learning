@@ -22,17 +22,15 @@ def show_images(data):
 	Returns:
 	Do not return any arguments, just save the images you plot for your report.
 	'''
-        '''
         for index in range(len(data)):
                 imgplot = plt.imshow(data[index])
-                plt.show(imgplot)
-                # After each figure pops up, I save it for the report
-        '''
+                plt.show(imgplot)                  # After each figure pops up, I save it for the report
+
 
                 
 def assign_sym_col(label):
         '''
-        This function assigns a red color & '*' symbole to labels '+1' (i.e. digit number 1) & a blue color & '+'
+        This function assigns a red color & '*' symbol to labels '+1' (i.e. digit number 1) and a blue color & '+'
         symbol to labels '-1' (i.e. digit number 5).
 
         Args:
@@ -53,6 +51,18 @@ def assign_sym_col(label):
 
 
 def show_features(data, label):
+        '''
+        This function is used for plot a 2-D scatter plot of the features and save it.
+        
+        Args:
+        data: train features with shape (1561, 2). The shape represents total 1561 samples and 
+        each sample has 2 features.
+        label: train data's label with shape (1561,1). 
+        +1 for digit number 1 and -1 for digit number 5.
+
+        Returns:
+        Do not return any arguments, just save the 2-D scatter plot of the features you plot for your report.
+        '''
         fig, ax = plt.subplots()
         (symbols, colors) = assign_sym_col(label)
         for _s, c, _x, _y in zip(symbols, colors, data[:,1], data[:,2]):
@@ -63,25 +73,54 @@ def show_features(data, label):
         
 
 def perceptron(data, label, max_iter, learning_rate):
-        t = 0; w = np.zeros((1,3))
+        '''
+        The perceptron classifier function.
+        
+        Args:
+        data: train data with shape (1561, 3), which means 1561 samples and 
+        each sample has 3 features.(1, symmetry, average internsity)
+        label: train data's label with shape (1561,1).
+        1 for digit number 1 and -1 for digit number 5.
+        max_iter: max iteration numbers
+        learning_rate: learning rate for weight update
+
+        Returns:
+        the seperater with shape (1, 3). You must initilize it with w = np.zeros((1,d))
+        '''
+        t = 0; w = np.zeros((1,len(data[0])))
         while t < max_iter:
                 for data_index, data_val in enumerate(data):
                         if sign(np.dot(w[0], data_val)) != label[data_index]:   # Misclassified Item
-                                w += learning_rate * label[data_index] * data_val
+                                w += learning_rate * label[data_index] * data_val  # Update weight
                 t += 1
         return w
 
 
 def show_result(data, label, w):
+        '''
+        This function is used for plot the test data with the separators and save it.
+        
+        Args:
+        data: test features with shape (424, 2). The shape represents total 424 samples and
+        each sample has 2 features.
+        label: test data's label with shape (424,1).
+        +1 for digit number 1 and -1 for digit number 5.
+
+        Returns:
+        Do not return any arguments, just save the image you plot for your report.
+        '''
+        # Set up plot
         fig, ax = plt.subplots()
-        # overlay the linear separator
+
+        # Overlay the linear separator
         X = data[:,0]
         Y = np.zeros(len(X))
         line_slope = -w[0][1] / w[0][2]; y_intercept = -w[0][0] / w[0][2]
         for index in range(len(Y)):
                 Y[index] = (line_slope * X[index]) + y_intercept
         ax.plot(X, Y, color='k', linewidth=2)
-        
+
+        # Add scatter plot
         (symbols, colors) = assign_sym_col(label)
         for _s, c, _x, _y in zip(symbols, colors, data[:,0], data[:,1]):
                 ax.scatter(_x, _y, s=50, marker=_s, c=c)

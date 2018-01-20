@@ -21,6 +21,27 @@ def show_images(data):
 		Do not return any arguments, just save the images you plot for your report.
 	'''
 
+def assign_sym_col(label):
+        '''
+        This function assigns a red color & '*' symbol to labels '+1' (i.e. digit number 1) and a blue color & '+'
+        symbol to labels '-1' (i.e. digit number 5).
+
+        Args:
+        label: train data's label with shape (1561,1). 
+	    1 for digit number 1 and -1 for digit number 5.
+
+        Returns:
+        A 2-tuple of two lists, each of length 1561
+        '''
+        symbols = []; colors = []
+        for val in label:
+                if val == 1:
+                        sym = '*'; col = 'red'
+                else:
+                        sym = '+'; col = 'blue'
+                symbols.append(sym); colors.append(col)
+        return (symbols, colors)
+
 
 def show_features(data, label):
 	'''
@@ -35,6 +56,7 @@ def show_features(data, label):
 	Returns:
 	Do not return any arguments, just save the 2-D scatter plot of the features you plot for your report.
 	'''
+
 
 
 def perceptron(data, label, max_iter, learning_rate):

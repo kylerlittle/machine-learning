@@ -1,7 +1,5 @@
 import numpy as np 
 from helper import *
-import matplotlib.pyplot as plt
-from pylab import norm
 
 '''
 Homework1: perceptron classifier
@@ -65,7 +63,7 @@ def show_features(data, label):
         '''
         fig, ax = plt.subplots()
         (symbols, colors) = assign_sym_col(label)
-        for _s, c, _x, _y in zip(symbols, colors, data[:,1], data[:,2]):
+        for _s, c, _x, _y in zip(symbols, colors, data[:,0], data[:,1]):
                 ax.scatter(_x, _y, s=50, marker=_s, c=c)
         plt.title('Training Data'); plt.xlabel('Symmetry Classifier'); plt.ylabel('Average Intensity')
         plt.show()
@@ -141,7 +139,7 @@ def accuracy_perceptron(data, label, w):
 	return (n-mistakes)/n
 
 
-def test_perceptron(max_iter, learning_rate, testcase, showresult = False):
+def test_perceptron(max_iter, learning_rate):
 	#get data
 	traindataloc,testdataloc = "../data/train.txt", "../data/test.txt"
 	train_data,train_label = load_features(traindataloc)
@@ -151,8 +149,6 @@ def test_perceptron(max_iter, learning_rate, testcase, showresult = False):
 	train_acc = accuracy_perceptron(train_data, train_label, w)	
 	#test perceptron model
 	test_acc = accuracy_perceptron(test_data, test_label, w)
-	if showresult:
-		show_result(test_data, test_label, w, testcase)
-	return train_acc, test_acc
+	return w, train_acc, test_acc
 
 

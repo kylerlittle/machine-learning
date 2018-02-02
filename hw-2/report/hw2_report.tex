@@ -1,6 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{stmaryrd}
 
 \author{Kyler Little}
 \title{Homework \#2: Machine Learning}
@@ -8,7 +9,17 @@
 \begin{document}
 	\maketitle
 	\section*{Problem \#1}
-	From LFD...
+	(a) More generally, if we are learning from $\pm1$ data to predict a noisy target $P{y|\boldsymbol{x}}$ with candidate hypothesis $h$, show that the maximum likelihood method reduces to the task of finding $h$ that minimizes:
+	\begin{equation}
+	E_{\text{in}}(\boldsymbol{w})= \sum_{n=1}^{N} \llbracket y_n=+1\rrbracket \ln(\frac{1}{h(\boldsymbol{x}_n)}) + \llbracket y_n=-1\rrbracket \ln \frac{1}{1-h(\boldsymbol{x}_n)}
+	\end{equation}
+	(b) For the case $h(\boldsymbol{x}) = \theta (\boldsymbol{w}^T\boldsymbol{x})$, argue that minimizing the in-sample error in part (a) is equivalent to minimizing the one in (3.9).
+	\\
+	For two probabilistic distributions ${p, 1-p}$ and ${q, 1-q }$ with binary outcomes, the cross-entropy (from information theory) is:
+	\begin{equation}
+		p\log\frac{1}{q} + (1-p)\log\frac{1}{1-q}
+	\end{equation}
+	The in-sample error in part (a) corresponds to a cross-entropy error measure on the data point $(\boldsymbol{x}_n, y_n)$, with $p=\llbracket y_n=+1\rrbracket$ and $q=h(\boldsymbol{x}_n)$.
 	\section*{Problem \#2}
 	Recall the objective function for linear regression can be expressed as 
 	\begin{equation}
@@ -40,9 +51,11 @@
 	\end{equation}
 	where the function $\theta(z) = \frac{1}{1+e^{-z}}$ looks like \\
 	\begin{figure}[h]
-		\includegraphics[width=\linewidth]{sigmoid.png}
-		\caption{A basic sigmoid curve}
-		\label{fig:sigmoidEx}
+		\begin{center}
+			\includegraphics[width=3in]{sigmoid.png}
+			\caption{A basic sigmoid curve}
+			\label{fig:sigmoidEx}
+		\end{center}
 	\end{figure}
 	\\ Explain why the decision boundary of logistic regression is still linear, though the linear signal $w^Tx$ is passed through a nonlinear function $\theta$ to compute the outcome of prediction.
 	Is the decision boundary still linear if the prediction rule is changed to the following? Justify briefly.

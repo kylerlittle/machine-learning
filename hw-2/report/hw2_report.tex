@@ -79,7 +79,7 @@
 	\begin{equation*}
 	E_2(w) = \frac{1}{N} (w^T X^T X w-w^T X^T y-y^T Xw+y^T y + \lambda w^T w)
 	\end{equation*}
-	Note that $w^T X^T y=(y^T Xw)^T$, so we may combine the middle two terms, since they are identical real numbers after evaluation, resulting in $-w^T X^T y -y^T Xw=-2w^T X^T y$. Now, we simply must take the derivative of $E_2(w)$, set it to $0$, and solve for $w$. For the first term, we use the fact that $\frac{\partial(w^T Aw)}{\partial w} = (A+A^T)w$. Since $A$ is symmetric, we have that $(A+A^T)w=2Aw$. In our situation, $A$ is replaced by $X^T X$, so $\frac{\partial(w^T X^T Xw)}{\partial w} = 2X^T Xw$. For the second term, we know that $\frac{\partial(2w^T X^T y)}{\partial w} = 2X^T y$, as discussed in class. The third term disappears since it is constant with respect to $w$. The last term seems tricky at first, but an easy solution is illuminated by writing $w^T w$ as $w_1^2+\cdots+w_n^2$. Thus, $\partial \lambda w^T w / \partial w_i = 2\lambda w_i$. This holds $\forall i \in {1,\dots, N}$, so $\partial \lambda w^T w / \partial w = 2\lambda w$. Thus, we have
+	Note that $w^T X^T y=(y^T Xw)^T$, so we may combine the middle two terms, since they are identical real numbers after evaluation, resulting in $-w^T X^T y -y^T Xw=-2w^T X^T y$. Now, we simply must take the derivative of $E_2(w)$, set it to $0$, and solve for $w$. For the first term, we use the fact that $\frac{\partial(w^T Aw)}{\partial w} = (A+A^T)w$. Since $A$ is symmetric, we have that $(A+A^T)w=2Aw$. In our situation, $A$ is replaced by $X^T X$, so $\frac{\partial(w^T X^T Xw)}{\partial w} = 2X^T Xw$. For the second term, we know that $\frac{\partial(2w^T X^T y)}{\partial w} = 2X^T y$, as discussed in class. The third term disappears since it is constant with respect to $w$. The last term seems tricky at first, but an easy solution is illuminated by writing $w^T w$ as $w_1^2+\cdots+w_n^2$. Thus, $\partial (\lambda w^T w) / \partial w_i = 2\lambda w_i$. This holds $\forall i \in {1,\dots, N}$, so $\partial (\lambda w^T w) / \partial w = 2\lambda w$. As a result, we have
 	\begin{equation*}
 	\nabla E_2(w) = \frac{1}{N} (2X^T Xw-2X^T y + 2\lambda w)
 	\end{equation*}
@@ -94,22 +94,33 @@
 	\end{align*}
 	(b) Explain how this new objective function can overcome the singularity problem
 	of $X^T X$. \\
-	Now, just prove it's nonsingular by showing it's positive definite. \\
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	We are not necessarily guaranteed that $X^T X$ is invertible. However, we will show that $(X^T X + \lambda I)$ is always invertible. We can do this by demonstrating that it's nonsingular. In this proof, we will show that $(X^T X + \lambda I)$ is a positive definite matrix, meaning that it's nonsingular. \\
+	First, write $(X^T X + \lambda I)$ as $A^T A$. $A^T A$ is still symmetric because $X^T X$ is symmetric, and subtracting $\lambda I$ won't affect $A$'s symmetry because it only affects the diagonal of $X^T X$. Now, in order for some matrix $A$ to be positive definite, we must have that $x^T Ax >0$, $\forall x \ne 0$. Let's now prove this.
+	\begin{align*}
+	x^T A^T A x &> 0 \\
+	(Ax)^T Ax &> 0 \\
+	||Ax||^2 &> 0 \\
+	\end{align*}
+	Why is $||Ax||^2$ strictly greater than zero? It's obvious that $||Ax||^2$ is greater than or equal to zero because the two-norm is nonnegative. However, we also know that $Ax$ cannot be equal to zero because subtracting the constant $\lambda$ from the diagonal of $X^T X$ gives us the liberty to always choose $\lambda$ such that $Ax$ is nonzero.
+	\\
 	\section*{Problem \#3}
 	In logistic regression, the objective function can be written as:
 	\begin{equation*}
 	E(w)=\frac{1}{N} \sum_{n=1}^{N} \ln(1+e^{-y_nw^Tx_n})
 	\end{equation*}
 	(a) (10 points) Compute the first-order derivative $\nabla E(w)$. You will need to provide the intermediate steps of derivation.\\
+	Using the chain rule, we first note that $\frac{d(\ln x)}{dx} = \frac{1}{x}$. Thus, we automatically have part of the derivative as
+	\begin{equation*}
+	\frac{1}{N} \sum_{n=1}^{N} \frac{1}{1+e^{-y_nw^Tx_n}}
+	\end{equation*}
+	Next, we differentiate the argument of the natural logarithm.
+	\begin{equation*}
+	\frac{d(1+e^{-y_nw^Tx_n})}{dw} = -y_n x_n e^{-y_nw^Tx_n}
+	\end{equation*}
+	This is easy to derive. If we write $w^T x$ as $w_1 x_1 + \cdots + w_n x_n$, then it becomes obvious why $\partial (w^T x) / \partial w = x$. In the end, we are left with:
+	\begin{align*}
+	\nabla E(w) = \frac{1}{N} \sum_{n=1}^{N} \frac{-y_n x_n e^{-y_nw^Tx_n}}{1+e^{-y_nw^Tx_n}}
+	\end{align*}
 	(b) (10 points) Once the optimal $w$ is obtained, it will be used to make predictions as follows:
 	\begin{equation*}
 	\text{Predicted class of x} = 
@@ -126,7 +137,8 @@
 			\label{fig:sigmoidEx}
 		\end{center}
 	\end{figure}
-	\\ Explain why the decision boundary of logistic regression is still linear, though the linear signal $w^Tx$ is passed through a nonlinear function $\theta$ to compute the outcome of prediction.
+	\\ 
+	Explain why the decision boundary of logistic regression is still linear, though the linear signal $w^Tx$ is passed through a nonlinear function $\theta$ to compute the outcome of prediction.
 	Is the decision boundary still linear if the prediction rule is changed to the following? Justify briefly.
 	\begin{equation*}
 	\text{Predicted class of x} = 
@@ -135,9 +147,11 @@
 	-1 & \text{if } \theta(w^Tx) < 0.9 \\
 	\end{cases}
 	\end{equation*}
-	
-	In light of your answers to the above two questions, what is the essential property of logistic regression that results in the linear decision boundary?
-	
+	The reason why the decision boundary of logistic regression is still linear is because the nonlinear function that processes the linear signal $w^T x$ is a monotonically increasing function. In other words, the output can be linearly separated because monotonically increasing/decreasing functions will never return to a value in their codomains after they have left it. Thus, even though the linear signal is passed through a nonlinear function $\theta$, the output of this nonlinear function is still linearly separable. \\
+	The new decision boundary listed above is still linear because we are merely translating the boundary (which is already linear).
+	\\ \\
+	In light of your answers to the above two questions, what is the essential property of logistic regression that results in the linear decision boundary? \\
+	The functional transformation must be monotonically increasing or decreasing. That is what allows logistic regression to retain a linear decision boundary.
 	
 	
 	

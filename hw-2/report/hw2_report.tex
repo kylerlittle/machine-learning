@@ -40,9 +40,13 @@
 	(b) For the case $h(\boldsymbol{x}) = \theta (\boldsymbol{w}^T\boldsymbol{x})$, argue that minimizing the in-sample error in part (a) is equivalent to minimizing the one in (3.9). \\
 	Substitute in $h(\boldsymbol{x}) = \theta (\boldsymbol{w}^T\boldsymbol{x}) = \frac{e^{w^T \boldsymbol{x}}}{1+e^{w^T \boldsymbol{x}}}$ to the in-sample error from part (a). This yields:
 	\begin{equation*}
-	E_{\text{in}}(\boldsymbol{w})= \sum_{n=1}^{N} \llbracket y_n=+1\rrbracket \ln\frac{1+e^{w^T \boldsymbol{x}}}{e^{w^T \boldsymbol{x}}} + \llbracket y_n=-1\rrbracket \ln \frac{1-e^{w^T \boldsymbol{x}}}{1-2e^{w^T \boldsymbol{x}}}
+	E_{\text{in}}(\boldsymbol{w})= \sum_{n=1}^{N} \llbracket y_n=+1\rrbracket \ln\frac{1+e^{w^T \boldsymbol{x}}}{e^{w^T \boldsymbol{x}}} + \llbracket y_n=-1\rrbracket \ln (1+e^{w^T \boldsymbol{x}})
 	\end{equation*}
-	Then we do some more math...
+	Next, use the rule $b\log(x)=\log(x^b)$ to bring the $y_n$'s inside the logarithms and $\log a + \log b = \log(ab)$ to reduce the two expression to a single expression:
+	\begin{equation*}
+	E_{\text{in}}(\boldsymbol{w})= \sum_{n=1}^{N} \ln (1+e^{-y_n w^T \boldsymbol{x}})
+	\end{equation*}
+	Multiplying by a constant factor of $1/N$ will not change the minimization problem. Thus, the argument is complete.
 	\\
 	\textbf{Side Note (from LFD):} \\
 	For two probabilistic distributions ${p, 1-p}$ and ${q, 1-q }$ with binary outcomes, the cross-entropy (from information theory) is:
@@ -50,6 +54,10 @@
 		p\log\frac{1}{q} + (1-p)\log\frac{1}{1-q}
 	\end{equation*}
 	The in-sample error in part (a) corresponds to a cross-entropy error measure on the data point $(\boldsymbol{x}_n, y_n)$, with $p=\llbracket y_n=+1\rrbracket$ and $q=h(\boldsymbol{x}_n)$.
+	
+	
+	
+	
 	\section*{Problem \#2}
 	Recall the objective function for linear regression can be expressed as 
 	\begin{equation*}
@@ -62,10 +70,40 @@
 	\end{equation*}
 	where $\lambda > 0$ is a user-specified parameter. Please do the following: \\
 	(a) Derive the optimal $w$ that minimize $E_2(w)$.\\
-	This part is fairly easy because we went over it in class, albeit without the $\lambda$ term. All I do now is add this in. \\
+	This is fairly straightforward. We differentiate $E_2(w)$, set the result to zero, and solve for $w$. The reason we can do this is because $E_2(w)$ is a convex function. This means its derivative is a monotonically increasing function, signifying that there is a unique global minimum. 
+	Before differentiating, it's necessary to reduce $E_2(w)$ to an expression that is more easily differentiated. To start, we recall that $||x||=\sqrt{x^T x}$. Applying this yields:
+	\begin{equation*}
+	E_2(w) = \frac{1}{N}((Xw-y)^T(Xw-y)+\lambda w^T w)
+	\end{equation*}
+	Expanding this out yields:
+	\begin{equation*}
+	E_2(w) = \frac{1}{N} (w^T X^T X w-w^T X^T y-y^T Xw+y^T y + \lambda w^T w)
+	\end{equation*}
+	Note that $w^T X^T y=(y^T Xw)^T$, so we may combine the middle two terms, since they are identical real numbers after evaluation, resulting in $-w^T X^T y -y^T Xw=-2w^T X^T y$. Now, we simply must take the derivative of $E_2(w)$, set it to $0$, and solve for $w$. For the first term, we use the fact that $\frac{\partial(w^T Aw)}{\partial w} = (A+A^T)w$. Since $A$ is symmetric, we have that $(A+A^T)w=2Aw$. In our situation, $A$ is replaced by $X^T X$, so $\frac{\partial(w^T X^T Xw)}{\partial w} = 2X^T Xw$. For the second term, we know that $\frac{\partial(2w^T X^T y)}{\partial w} = 2X^T y$, as discussed in class. The third term disappears since it is constant with respect to $w$. The last term seems tricky at first, but an easy solution is illuminated by writing $w^T w$ as $w_1^2+\cdots+w_n^2$. Thus, $\partial \lambda w^T w / \partial w_i = 2\lambda w_i$. This holds $\forall i \in {1,\dots, N}$, so $\partial \lambda w^T w / \partial w = 2\lambda w$. Thus, we have
+	\begin{equation*}
+	\nabla E_2(w) = \frac{1}{N} (2X^T Xw-2X^T y + 2\lambda w)
+	\end{equation*}
+	Now, we set $\nabla E_2(w)$ to zero and isolate $w$.
+	\begin{align*}
+	0 &= \frac{1}{N} (2X^T Xw-2X^T y + 2\lambda w) \\
+	0 &= X^T Xw-X^T y + \lambda w \\
+	X^T y &= X^T X w + \lambda w	\\
+	X^T y &= (X^T X + \lambda I)w \\
+	(X^T X + \lambda I)^{-1}X^T y &=(X^T X+\lambda I)^{-1}(X^T X + \lambda I) w \\
+	w&=(X^T X + \lambda I)^{-1}X^T y
+	\end{align*}
 	(b) Explain how this new objective function can overcome the singularity problem
 	of $X^T X$. \\
 	Now, just prove it's nonsingular by showing it's positive definite. \\
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	\section*{Problem \#3}
 	In logistic regression, the objective function can be written as:
 	\begin{equation*}
@@ -99,6 +137,10 @@
 	\end{equation*}
 	
 	In light of your answers to the above two questions, what is the essential property of logistic regression that results in the linear decision boundary?
+	
+	
+	
+	
 	
 	\section*{Problem \#4}
 	As your final deliverable to a customer, would you use the linear model with or without the 3rd order polynomial transform? Briefly explain your reasoning.

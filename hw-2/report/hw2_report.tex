@@ -157,6 +157,15 @@
 	
 	
 	\section*{Problem \#4}
-	As your final deliverable to a customer, would you use the linear model with or without the 3rd order polynomial transform? Briefly explain your reasoning.
+	As your final deliverable to a customer, would you use the linear model with or without the 3rd order polynomial transform? Briefly explain your reasoning. \\
+	Based on my results, I would use the linear model without the 3rd order polynomial transform. The results I obtained with the 3rd order polynomial transform were not significantly better than those without the transform, as you can see in the figure below.
+	\begin{figure}[h]
+		\begin{center}
+			\includegraphics[width=\linewidth]{hw2_results.png}
+			\caption{Logistic Regression Console Output}
+			\label{fig:log_reg_results}
+		\end{center}
+	\end{figure}
+	Although the 3rd order polynomial transform seems to do much better than the unmodified linear model when the maximum iterations are low, they achieve roughly equivalent results when the maximum number of iterations are higher. Furthermore, they achieve essentially the same accuracy ratings for the same learning rates. In my opinion, the very marginal improvement in the model is not worth it due to the sacrifice in performance. The 3rd order polynomial transform adds much unnecessary overhead, and it also causes poor generalization.
 	
 \end{document}

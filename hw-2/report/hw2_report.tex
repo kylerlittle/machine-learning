@@ -1,10 +1,12 @@
 \documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{stmaryrd}
 
-\author{Kyler Little}
-\title{Homework \#2: Machine Learning}
+\author{Kyler Little\vspace{-0.6cm}}
+\title{Homework \#2: Machine Learning\vspace{-0.3cm}}
+\date{February 8, 2018\vspace{-0.7cm}}
 
 \begin{document}
 	\maketitle
@@ -29,7 +31,7 @@
 	\begin{equation*}
 	\prod_{n=1}^{N} P(y_n|\boldsymbol{x}_n) 
 	\end{equation*}
-	The method of maximum likelihood method would selects the hypothesis $h$ which maximizes the probability above. We can actually express this maximization problem as a minimization problem by using the properties of '$\ln$'. The natural logarithm is a monotonically increasing function, and so taking the natural logarithm of the probability above will not affect the maximization problem. By the same token, '$-\ln$' is a monotonically decreasing function, so we can take the natural logarithm of the probability above and convert the maximization problem to a minimization problem without affecting global minima of the probability distribution. Using a simple logarithm rule ($-\ln x =\ln x^{-1}$), we find:
+	The method of maximum likelihood method would select the hypothesis $h$ which maximizes the probability above. We can actually express this maximization problem as a minimization problem by using the properties of '$\ln$'. The natural logarithm is a monotonically increasing function, and so taking the natural logarithm of the probability above will not affect the maximization problem. By the same token, '$-\ln$' is a monotonically decreasing function, so we can take the natural logarithm of the probability above and convert the maximization problem to a minimization problem without affecting global minima of the probability distribution. Using a simple logarithm rule ($-\ln x =\ln x^{-1}$), we find:
 	\begin{equation*}
 	\prod_{n=1}^{N} P(y_n|\boldsymbol{x}_n) = \sum_{n=1}^{N} \ln \frac{1}{P(y_n|\boldsymbol{x}_n)}
 	\end{equation*}
@@ -79,7 +81,7 @@
 	\begin{equation*}
 	E_2(w) = \frac{1}{N} (w^T X^T X w-w^T X^T y-y^T Xw+y^T y + \lambda w^T w)
 	\end{equation*}
-	Note that $w^T X^T y=(y^T Xw)^T$, so we may combine the middle two terms, since they are identical real numbers after evaluation, resulting in $-w^T X^T y -y^T Xw=-2w^T X^T y$. Now, we simply must take the derivative of $E_2(w)$, set it to $0$, and solve for $w$. For the first term, we use the fact that $\frac{\partial(w^T Aw)}{\partial w} = (A+A^T)w$. Since $A$ is symmetric, we have that $(A+A^T)w=2Aw$. In our situation, $A$ is replaced by $X^T X$, so $\frac{\partial(w^T X^T Xw)}{\partial w} = 2X^T Xw$. For the second term, we know that $\frac{\partial(2w^T X^T y)}{\partial w} = 2X^T y$, as discussed in class. The third term disappears since it is constant with respect to $w$. The last term seems tricky at first, but an easy solution is illuminated by writing $w^T w$ as $w_1^2+\cdots+w_n^2$. Thus, $\partial (\lambda w^T w) / \partial w_i = 2\lambda w_i$. This holds $\forall i \in {1,\dots, N}$, so $\partial (\lambda w^T w) / \partial w = 2\lambda w$. As a result, we have
+	Note that $w^T X^T y=(y^T Xw)^T$, so we may combine the second and third terms, since they are identical real numbers after evaluation, resulting in $-w^T X^T y -y^T Xw=-2w^T X^T y$. Now, we simply must take the derivative of $E_2(w)$, set it to $0$, and solve for $w$. For the first term, we use the fact that $\frac{\partial(w^T Aw)}{\partial w} = (A+A^T)w$. Since $A$ is symmetric, we have that $(A+A^T)w=2Aw$. In our situation, $A$ is replaced by $X^T X$, so $\frac{\partial(w^T X^T Xw)}{\partial w} = 2X^T Xw$. For the second term, we know that $\frac{\partial(2w^T X^T y)}{\partial w} = 2X^T y$, as discussed in class. The third term disappears since it is constant with respect to $w$. The last term seems tricky at first, but an easy solution is illuminated by writing $w^T w$ as $w_1^2+\cdots+w_n^2$. Thus, $\partial (\lambda w^T w) / \partial w_i = 2\lambda w_i$. This holds $\forall i \in {1,\dots, N}$, so $\partial (\lambda w^T w) / \partial w = 2\lambda w$. As a result, we have
 	\begin{equation*}
 	\nabla E_2(w) = \frac{1}{N} (2X^T Xw-2X^T y + 2\lambda w)
 	\end{equation*}
@@ -95,32 +97,41 @@
 	(b) Explain how this new objective function can overcome the singularity problem
 	of $X^T X$. \\
 	We are not necessarily guaranteed that $X^T X$ is invertible. However, we will show that $(X^T X + \lambda I)$ is always invertible. We can do this by demonstrating that it's nonsingular. In this proof, we will show that $(X^T X + \lambda I)$ is a positive definite matrix, meaning that it's nonsingular. \\
-	First, write $(X^T X + \lambda I)$ as $A^T A$. $A^T A$ is still symmetric because $X^T X$ is symmetric, and subtracting $\lambda I$ won't affect $A$'s symmetry because it only affects the diagonal of $X^T X$. Now, in order for some matrix $A$ to be positive definite, we must have that $x^T Ax >0$, $\forall x \ne 0$. Let's now prove this.
+	First, write $(X^T X + \lambda I)$ as $A^T A$. It's clear that $A^T A$ is still symmetric because $X^T X$ is symmetric, and subtracting $\lambda I$ won't affect $A$'s symmetry because it only affects the diagonal of $X^T X$. Now, in order for some matrix $A$ to be positive definite, we must have that $x^T Ax >0$, $\forall x \ne 0$. Let's now prove this.
 	\begin{align*}
 	x^T A^T A x &> 0 \\
 	(Ax)^T Ax &> 0 \\
 	||Ax||^2 &> 0 \\
 	\end{align*}
-	Why is $||Ax||^2$ strictly greater than zero? It's obvious that $||Ax||^2$ is greater than or equal to zero because the two-norm is nonnegative. However, we also know that $Ax$ cannot be equal to zero because subtracting the constant $\lambda$ from the diagonal of $X^T X$ gives us the liberty to always choose $\lambda$ such that $Ax$ is nonzero.
+	Why is $||Ax||^2$ strictly greater than zero? It's obvious that $||Ax||^2$ is greater than or equal to zero because the Euclidean norm is nonnegative. However, we can guarantee that $Ax$ cannot be equal to zero because subtracting the constant $\lambda$ from the diagonal of $X^T X$ gives us the liberty to always choose $\lambda$ such that $Ax$ is nonzero.
 	\\
 	\section*{Problem \#3}
 	In logistic regression, the objective function can be written as:
 	\begin{equation*}
-	E(w)=\frac{1}{N} \sum_{n=1}^{N} \ln(1+e^{-y_nw^Tx_n})
+	E(w)=\frac{1}{N} \sum_{n=1}^{N} \ln(1+e^{-y_nw^T\boldsymbol{x}_n})
 	\end{equation*}
 	(a) (10 points) Compute the first-order derivative $\nabla E(w)$. You will need to provide the intermediate steps of derivation.\\
-	Using the chain rule, we first note that $\frac{d(\ln x)}{dx} = \frac{1}{x}$. Thus, we automatically have part of the derivative as
+	Using the chain rule, we first note that $\frac{d(\ln \boldsymbol{x})}{d\boldsymbol{x}} = \frac{1}{\boldsymbol{x}}$. Thus, we automatically have part of the derivative as
 	\begin{equation*}
 	\frac{1}{N} \sum_{n=1}^{N} \frac{1}{1+e^{-y_nw^Tx_n}}
 	\end{equation*}
 	Next, we differentiate the argument of the natural logarithm.
 	\begin{equation*}
-	\frac{d(1+e^{-y_nw^Tx_n})}{dw} = -y_n x_n e^{-y_nw^Tx_n}
+	\frac{d(1+e^{-y_nw^Tx_n})}{dw} = -y_n \boldsymbol{x}_n e^{-y_nw^Tx_n}
 	\end{equation*}
-	This is easy to derive. If we write $w^T x$ as $w_1 x_1 + \cdots + w_n x_n$, then it becomes obvious why $\partial (w^T x) / \partial w = x$. In the end, we are left with:
+	This is easy to derive. If we write $w^T \boldsymbol{x}$ as $w_1 x_1 + \cdots + w_n x_n$, then it becomes obvious why $\partial (w^T \boldsymbol{x}) / \partial w = \boldsymbol{x}$. We are left with:
 	\begin{align*}
-	\nabla E(w) = -\frac{1}{N} \sum_{n=1}^{N} \frac{y_n x_n e^{-y_nw^Tx_n}}{1+e^{-y_nw^Tx_n}}
+	\nabla E(w) = -\frac{1}{N} \sum_{n=1}^{N} \frac{y_n \boldsymbol{x}_n e^{-y_nw^T \boldsymbol{x}_n}}{1+e^{-y_nw^T \boldsymbol{x}_n}}
 	\end{align*}
+	Now, we'd like to make the exponential in the denominator positive, so we multiply by a convenient version of the number one.
+	\begin{align*}
+	\nabla E(w) &= -\frac{1}{N} \sum_{n=1}^{N} \frac{y_n \boldsymbol{x}_n e^{-y_nw^T\boldsymbol{x}_n}}{1+e^{-y_nw^T\boldsymbol{x}_n}} \left( \frac{1+e^{y_n w^T \boldsymbol{x}_n}/1+e^{-y_n w^T \boldsymbol{x}_n}}{1+e^{y_n w^T \boldsymbol{x}_n}/1+e^{-y_n w^T \boldsymbol{x}_n}}\right) \\	
+	\nabla E(w) &= -\frac{1}{N} \sum_{n=1}^{N} \frac{y_n \boldsymbol{x}_n e^{-y_nw^T\boldsymbol{x}_n}}{1+e^{y_nw^T\boldsymbol{x}_n}} \left( \frac{1+e^{y_n w^T \boldsymbol{x}_n}}{1+e^{-y_n w^T \boldsymbol{x}_n}} \right) \\
+	\nabla E(w) &= -\frac{1}{N} \sum_{n=1}^{N} \frac{y_n \boldsymbol{x}_n e^{-y_nw^T\boldsymbol{x}_n} + y_n \boldsymbol{x}_n e^0}{1+e^{y_nw^T\boldsymbol{x}_n}} \left( \frac{1}{1+e^{-y_n w^T \boldsymbol{x}_n}} \right) \\
+	\nabla E(w) &= -\frac{1}{N} \sum_{n=1}^{N} \frac{y_n \boldsymbol{x}_n (e^{-y_nw^T\boldsymbol{x}_n} + 1)}{1+e^{y_nw^T\boldsymbol{x}_n}} \left( \frac{1}{1+e^{-y_n w^T \boldsymbol{x}_n}} \right) \\
+	\nabla E(w) &= -\frac{1}{N} \sum_{n=1}^{N} \frac{y_n \boldsymbol{x}_n}{1+e^{y_nw^T\boldsymbol{x}_n}} 
+	\end{align*}
+	This is the result obtained in the book, so we are done. \\
 	(b) (10 points) Once the optimal $w$ is obtained, it will be used to make predictions as follows:
 	\begin{equation*}
 	\text{Predicted class of x} = 
@@ -166,6 +177,6 @@
 			\label{fig:log_reg_results}
 		\end{center}
 	\end{figure}
-	Although the 3rd order polynomial transform seems to do much better than the unmodified linear model when the maximum iterations are low, they achieve roughly equivalent results when the maximum number of iterations are higher. Furthermore, they achieve essentially the same accuracy ratings for the same learning rates. In my opinion, the very marginal improvement in the model is not worth it due to the sacrifice in performance. The 3rd order polynomial transform adds much unnecessary overhead, and it also causes poor generalization.
+	Although the 3rd order polynomial transform seems to do better than the unmodified linear model when the maximum iterations are low, they achieve roughly equivalent results when the maximum number of iterations is higher. Furthermore, they achieve essentially the same accuracy ratings for the same learning rates. In my opinion, the very marginal improvement in the model is not worth it due to the sacrifice in performance. The 3rd order polynomial transform adds much unnecessary overhead, and it also causes poor generalization.
 	
 \end{document}

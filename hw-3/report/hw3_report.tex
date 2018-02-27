@@ -60,11 +60,17 @@
 	&\propto 0.072 \\
 	\end{align*}
 	Since $P(\text{No} \, \vert \, x^*) > P(\text{Yes} \, \vert \, x^*)$, our decision is  ``No.''
+	
+	
 	\section*{Problem \#3}
 	This question is about na\"ive Bayes classifier. Please do the following: \\
 	(a) State what is the simplifying assumption made by na\"ive Bayes classifier. \\
+	The simplifying assumption is that each $x_i$ of the input vector are conditionally independent, given the target value (classification). In other words, the probability of observing $x_{1}, x_{2}, ..., x_{d}$, given the target value, is just the product of the probabilities of the individual attributes: $P(x_{1}, x_{2}, ..., x_{d} \, \vert \, y) = \prod_{i=1}^{d}P(x_{i} \, \vert \, y)$. \\
 	(b) Given a binary-class  classification  problem  in  which the  class  labels  are  binary,  the  dimension  of feature is $d$, and each attribute can take $k$ different values. Please provide the numbers of parameters to  be  estimated  with  AND  without  the  simplifying  assumption. Briefly  justify  why the  simplifying assumption is necessary. \\
-	
+	\paragraph{}
+	Without the simplifying assumption, one has to enumerate all possible values of the input space, and for each distinct value, calculate its frequency in the training data to obtain an estimate. The problem with this is that the number of these parameters needed to be estimated is the number of target values (i.e. class labels) times the number of distinct values in the input space minus one (the last value need not be estimated since it is one subtract the sum of the others). This is a very large number of parameters to be estimated. For instance, in our situation, each $x_i$ can take $k$ different values, and there are $d$ attributes. By the multiplication rule for combinatorics, there are $k * k * \cdots * k = k^d$ distinct values of the input space. The last value need not be estimated; in fact, it is not free to vary. Thus, the number of degrees of freedom is $k^{d} - 1$. Since we must estimate this number of parameters for each class or target value, there are $2(k^{d} - 1)$ parameters to be estimated. \par
+	On the other hand, when the simplifying assumption is made, we are able to estimate far less parameters. We need only estimate the number of target values (i.e. class labels) times the number of distinct attributes-- $2d$ in this case. \par
+	Besides the fact that this simplifying assumption significantly reduces the number of parameters to be estimated ($2(k^{d} - 1) \ll 2d$, in general), the assumption is necessary for other reasons as well. Without the assumption, the model wouldn't generalize well to unseen data. For instance, if the model hadn't seen a particular input vector in its training data, there wouldn't be a prediction at all, since $P(x \, \vert \, y_{1}) = P(x \, \vert \, y_{2})= 0$. Thus, an extremely large training data set would be needed in order for the model to function correctly. The size of the training data set $N$ would need to be much larger than $k^{d}$, which is very infeasible in reality. 
 	
 	\section*{Problem \#4}
 	Assume we want to classify science texts into three categories— physics, biology and chemistry. The  following  probabilities  have  been  estimated  from  analyzing  a  corpus  of  pre-classified  web-pages gathered from Yahoo.

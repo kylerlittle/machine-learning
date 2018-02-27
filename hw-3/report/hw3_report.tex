@@ -45,8 +45,21 @@
 			10 & Red & Sports & Imported & Yes \\
 		\end{tabular*}
 	\end{center}
-
-	
+	Let $x^* = [\text{Red} \ \text{SUV} \ \text{Domestic}]^T$. To use na\"ive Bayes' classifier, we shall calculate $P(\text{Yes} \, \vert \, x^*)$ and $P(\text{No} \, \vert \, x^*)$. Whichever is larger will be the decision. To start, we will calculate $P(\text{Yes} \, \vert \, x^*)$. We ignore the denominators because they are the same, and we only care which is larger.
+	\begin{align*}
+	P(\text{Yes} \, \vert \, x^*) &\propto P(x^* \, \vert \, \text{Yes}) * P(\text{Yes}) \\
+	&\propto (P(\text{Red} \, \vert \, \text{Yes}) * P(\text{SUV} \, \vert \, \text{Yes}) * P(\text{Domestic} \, \vert \, \text{Yes})) * P(\text{Yes}) \\
+	&\propto ((3/5)*(1/5)*(2/5))*0.5\\
+	&\propto 0.024 \\
+	\end{align*}
+	Next, we calculate $P(\text{No} \, \vert \, x^*)$, again ignoring the denominator.
+	\begin{align*}
+	P(\text{No} \, \vert \, x^*) &\propto P(x^* \, \vert \, \text{No}) * P(\text{No}) \\
+	&\propto (P(\text{Red} \, \vert \, \text{No}) * P(\text{SUV} \, \vert \, \text{No}) * P(\text{Domestic} \, \vert \, \text{No})) * P(\text{No}) \\
+	&\propto ((2/5)*(3/5)*(3/5))*0.5\\
+	&\propto 0.072 \\
+	\end{align*}
+	Since $P(\text{No} \, \vert \, x^*) > P(\text{Yes} \, \vert \, x^*)$, our decision is  ``No.''
 	\section*{Problem \#3}
 	This question is about na\"ive Bayes classifier. Please do the following: \\
 	(a) State what is the simplifying assumption made by na\"ive Bayes classifier. \\

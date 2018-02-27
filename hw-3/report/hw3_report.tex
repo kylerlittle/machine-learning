@@ -154,6 +154,30 @@
 		\end{tabular*}
 	\end{center}
 	From the classified examples in the above table, construct two decision trees (by hand) for the classification "Play Golf." For the  first tree, use Temperature as the root node. (This  is
-	a really bad  choice.) Continue the construction  of  tree  as  discussed  in  class  for  the  subsequent  nodes using information  gain. Remember  that different attributes can be used in different branches on a given level of the tree. For the second tree, follow the  Decision Tree Learning  algorithm described  in class. At  each step,  choose  the  attribute  with  the  highest information gain. Work out the computations of information gain by hand and draw the decision tree.
+	a really bad  choice.) Continue the construction  of  tree  as  discussed  in  class  for  the  subsequent  nodes using information  gain. Remember  that different attributes can be used in different branches on a given level of the tree. For the second tree, follow the  Decision Tree Learning  algorithm described  in class. At  each step,  choose  the  attribute  with  the  highest information gain. Work out the computations of information gain by hand and draw the decision tree.\\
+	
+	For the first tree, we use Temperature as the root node. As we shall see in construction of the second tree, Temperature is the worst of the three choices.
+	For construction of the second tree, we follow the Decision Tree Learning Algorithm. For any given node, we pick the attribute with the largest information gain (IG). If $I$ is the entropy function, then we always select the attribute $v$ such that:
+	\begin{equation*}
+	\text{Selected Attribute} = \text{max arg}_{v} \ \text{IG} = \text{max arg}_{v} \ (I_{\text{before}}-I_{\text{after}})
+	\end{equation*}
+	Note that $I_{\text{after}}$ is dependent upon $v$. Starting from the root node, we compute the selected attribute. The $IG$ is computed in the following order: Outlook, Temperature, Humidity, Windy.
+	\begin{align*}
+	\text{Selected Attribute} &= \text{max arg}_{v} \  (1-(\frac{5}{14}I(\frac{3}{5},\frac{2}{5}) + \frac{4}{14}I(\frac{0}{4},\frac{4}{4}) + \frac{5}{14}I(\frac{2}{5},\frac{3}{5})), \\
+	&\qquad\qquad\qquad 1-(\frac{4}{14}I(\frac{1}{2},\frac{1}{2}) + \frac{6}{14}I(\frac{2}{6},\frac{4}{6}) + \frac{4}{14}I(\frac{1}{4},\frac{3}{4})), \\
+	&\qquad\qquad\qquad 1-(\frac{7}{14}I(\frac{3}{7},\frac{4}{7}) + \frac{7}{14}I(\frac{1}{7},\frac{6}{7})), \\
+	&\qquad\qquad\qquad 1-(\frac{6}{14}I(\frac{3}{6},\frac{3}{6}) + \frac{8}{14}I(\frac{2}{8},\frac{6}{8}))) \\
+	&= \text{max arg}_{v} \ (0.3065, 0.0889, 0.2117, 0.1078) \\
+	&= \text{Outlook}
+	\end{align*}
+	As we can see, the root node will be ``Outlook." In this case, we see that if the Outlook is `overcast', the decision is always `Y.' Thus, we obtain a leaf node there. For the other two branches-- sunny and rain--, it's easy to see that maximum information gain can be obtained by using the ``Humidity" attribute on the `sunny' branch and the ``Windy" attribute on the `rain' branch. Because the information gain is maximized (i.e. all propagated instances belong to one class), there is no need to check other potential attributes. We instantly have leaf nodes. The resulting tree is below.
+	\begin{figure}[h]
+		\begin{center}
+			\includegraphics[width=300pt]{hw3_ml_tree2.jpg}
+			\caption{Decision Tree (correct)}
+			\label{fig:tree2}
+		\end{center}
+	\end{figure}
+	Note: all figures were drawn on ``draw.io."
 	
 \end{document}

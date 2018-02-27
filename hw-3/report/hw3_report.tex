@@ -75,15 +75,15 @@
 	\section*{Problem \#4}
 	Assume we want to classify science texts into three categories— physics, biology and chemistry. The  following  probabilities  have  been  estimated  from  analyzing  a  corpus  of  pre-classified  web-pages gathered from Yahoo.
 		\begin{center}
-			\begin{tabular*}{240pt}[t]{l | c c c}
+			\begin{tabular*}{245pt}[t]{l | c c c}
 				c & Physics & Biology & Chemistry \\
 				\hline
-				P(c) & Red & Sports & Domestic  \\
-				P(atom $\vert$ c) & Red & Sports & Domestic \\
-				P(carbon $\vert$ c) & Red & Sports & Domestic \\
-				P(proton $\vert$ c) & Yellow & Sports & Domestic  \\
-				P(life $\vert$ c) & Yellow & Sports & Imported \\
-				P(earth $\vert$ c) & Yellow & SUV & Imported  \\
+				P(c) & 0.35 & 0.40 & 0.25  \\
+				P(atom $\vert$ c) & 0.1 & 0.01 & 0.2 \\
+				P(carbon $\vert$ c) & 0.005 & 0.03 & 0.05 \\
+				P(proton $\vert$ c) & 0.05 & 0.001 & 0.05  \\
+				P(life $\vert$ c) & 0.001 & 0.1 & 0.008 \\
+				P(earth $\vert$ c) & 0.005 & 0.006 & 0.003  \\
 			\end{tabular*}
 		\end{center}
 	Assuming that the probability of each evidence word is independent of other word occurrences given the category of the text, compute the (posterior) probability for each of the possible categories each of the following short texts; and based on that, their most likely classification. Assume that the categories are disjoint and exhaustive (i.e., every text is either physics, or biology or chemistry, and no text can be more than one). Assume that words are first stemmed to reduce them to their base form (atoms $\rightarrow$ atom) and ignore any words that are not in the table:
@@ -93,7 +93,43 @@
 	B: the carbon atom contains 12 protons. \\
 	\end{tabular*}
 	\end{center}
-	
+	This is a job for na\"ive Bayes' classifier. The first task will be to vectorize A and B. We will use a binary vector, where words `atom', `carbon', `proton', `life', and `earth' correspond to entries one through five of the vector. If the word appears at least once, then the entry will be set to 1. Otherwise, it will be 0.
+	\begin{center}
+		\begin{tabular*}{250pt}[t]{l}
+			A = $[1 \ 1 \ 0 \ 1 \ 1]^T$ \\
+			B = $[1 \ 1 \ 1 \ 0 \ 0]^T$ \\
+		\end{tabular*}
+	\end{center}
+	The decision will be:
+	\begin{equation*}
+	\text{arg max}_{v} \prod_{j=1}^{5} p_{j}(x^{j} \, \vert \, y=v) p(y = v)
+	\end{equation*}
+	where $v \in \lbrace {\text{Physics}, \text{Biology}, \text{Chemistry}}\rbrace$. We begin with classifying A.
+	\begin{align*}
+	\hat{y} &= \text{arg max}_{v} \prod_{j=1}^{5} p_{j}(x^{j} \, \vert \, y=v) p(y = v) \\
+	&= \text{arg max} ( \prod_{j=1}^{5} p_{j}(x^{j} \, \vert \, y=\text{Physics}) p(y = \text{Physics}), \\
+	& \qquad\qquad\quad \prod_{j=1}^{5} p_{j}(x^{j} \, \vert \, y=\text{Biology}) p(y = \text{Biology}), \\
+	& \qquad \qquad \quad \prod_{j=1}^{5} p_{j}(x^{j} \, \vert \, y=\text{Chemistry}) p(y = \text{Chemistry}) ) \\
+	&= \text{arg max} ((0.1*0.005*0.95*0.001*0.005)*0.35,\\
+	&\qquad\qquad\quad (0.01*0.03*0.999*0.1*0.006)*0.40,\\
+	&\qquad\qquad\quad (0.2*0.05*0.95*0.008*0.003)*0.25) \\
+	&= \text{arg max} (8.3125 \cdot 10^{-10}, 7.1928 \cdot 10^{-8},5.7000 \cdot 10^{-8}) \\
+	&= \text{arg } 7.1928 \cdot 10^{-8} \\
+	&= \text{Biology} \\
+	\end{align*}
+	Next, we classify B.
+	\begin{align*}
+	\hat{y} &= \text{arg max}_{v} \prod_{j=1}^{5} p_{j}(x^{j} \, \vert \, y=v) p(y = v) \\
+	&= \text{arg max} ( \prod_{j=1}^{5} p_{j}(x^{j} \, \vert \, y=\text{Physics}) p(y = \text{Physics}), \\
+	& \qquad\qquad\quad \prod_{j=1}^{5} p_{j}(x^{j} \, \vert \, y=\text{Biology}) p(y = \text{Biology}), \\
+	& \qquad \qquad \quad \prod_{j=1}^{5} p_{j}(x^{j} \, \vert \, y=\text{Chemistry}) p(y = \text{Chemistry}) ) \\
+	&= \text{arg max} ((0.1*0.005*0.05*0.999*0.995) * 0.35,\\
+	&\qquad\qquad\quad (0.01*0.03*0.001*0.9*0.994)*0.40,\\
+	&\qquad\qquad\quad (0.2*0.05*0.05*0.992*0.997)*0.25) \\
+	&= \text{arg max} (8.6975 \cdot 10^{-6}, 1.0735 \cdot 10^{-7}, 1.2363 \cdot 10^{-4}) \\
+	&= \text{arg } 1.2363 \cdot 10^{-4} \\
+	&= \text{Chemistry} \\
+	\end{align*}
 	
 	\section*{Problem \#5}
 	Consider the following table of observations:

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.17)  27 FEB 2018 19:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.17)  27 FEB 2018 19:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -278,7 +278,7 @@ msy/m/n/12 j \OML/cmm/m/it/12 x[]\OT1/cmr/m/n/12 )$.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 67--71
+Underfull \hbox (badness 10000) in paragraph at lines 70--72
 
  []
 
@@ -287,22 +287,22 @@ Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ” in font cmr12!
 
-Overfull \hbox (1.5383pt too wide) in alignment at lines 79--88
+Overfull \hbox (1.5383pt too wide) in alignment at lines 80--89
 [][][][]
  []
 
-
-Overfull \hbox (33.94025pt too wide) in alignment at lines 92--95
+[3]
+Overfull \hbox (33.94025pt too wide) in alignment at lines 93--96
 []
  []
 
-[3]
-Underfull \hbox (badness 10000) in alignment at lines 99--102
+
+Underfull \hbox (badness 10000) in alignment at lines 100--103
 []
  []
 
 [4]
-Underfull \hbox (badness 10000) in alignment at lines 138--155
+Underfull \hbox (badness 10000) in alignment at lines 139--156
 [][][][][][]
  []
 
@@ -310,13 +310,13 @@ Underfull \hbox (badness 10000) in alignment at lines 138--155
 File: hw3_ml_tree1.jpg Graphic file (type jpg)
 
 <use hw3_ml_tree1.jpg>
-Package pdftex.def Info: hw3_ml_tree1.jpg used on input line 167.
+Package pdftex.def Info: hw3_ml_tree1.jpg used on input line 173.
 (pdftex.def)             Requested size: 440.0pt x 190.43071pt.
  [6]
 <hw3_ml_tree2.jpg, id=31, 372.39125pt x 231.86626pt>
 File: hw3_ml_tree2.jpg Graphic file (type jpg)
  <use hw3_ml_tree2.jpg>
-Package pdftex.def Info: hw3_ml_tree2.jpg used on input line 188.
+Package pdftex.def Info: hw3_ml_tree2.jpg used on input line 190.
 (pdftex.def)             Requested size: 300.0pt x 186.79877pt.
 
 [7 <./hw3_ml_tree1.jpg>] [8 <./hw3_ml_tree2.jpg>] (./hw3_report.aux) ) 
@@ -327,7 +327,7 @@ Here is how much of TeX's memory you used:
  6055 multiletter control sequences out of 15000+600000
  10850 words of font info for 41 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,11n,32p,1061b,258s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,11n,32p,1139b,258s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/t
@@ -338,7 +338,7 @@ ts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type
 c/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmsy8.pfb>
-Output written on hw3_report.pdf (8 pages, 192283 bytes).
+Output written on hw3_report.pdf (8 pages, 192170 bytes).
 PDF statistics:
  69 PDF objects out of 1000 (max. 8388607)
  47 compressed objects within 1 object stream

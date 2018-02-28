@@ -7,7 +7,7 @@
 
 \author{Kyler Little\vspace{-0.6cm}}
 \title{Homework \#3: Machine Learning\vspace{-0.3cm}}
-\date{February 26, 2018\vspace{-0.7cm}}
+\date{February 27, 2018\vspace{-0.7cm}}
 
 \begin{document}
 	\maketitle
@@ -20,7 +20,7 @@
 	&= 0.3(0.2) + 0.5(0.2) + 0.3(0.6) \\
 	&= 0.34\\
 	\end{align*}
-	The second question asks us to compute $p(g \vert \text{orange})$. We have all of the conditional properties of the form $P(\text{fruit} \vert \text{box})$, and we want $P(\text{box} \vert \text{fruit})$. This is exactly the purpose of Bayes' Theorem, and so we apply it.
+	The second question asks us to compute $p(g \vert \text{orange})$. We have all of the conditional probabilities of the form $P(\text{fruit} \vert \text{box})$, and we want $P(\text{box} \vert \text{fruit})$. This is exactly the purpose of Bayes' Theorem, and so we apply it.
 	\begin{align*}
 	p(g \vert \text{orange}) &= \frac{p(\text{orange} \vert g) * p(g)}{p(\text{orange})} \\
 	&= \frac{p(\text{orange} \vert g) * p(g)}{p(\text{orange} \vert r) p(r) + p(\text{orange} \vert b) p(b) + p(\text{orange} \vert g) p(g)}\\
@@ -65,11 +65,12 @@
 	
 	\section*{Problem \#3}
 	This question is about na\"ive Bayes classifier. Please do the following: \\
-	(a) State what is the simplifying assumption made by na\"ive Bayes classifier. \\
-	The simplifying assumption is that each $x_i$ of the input vector are conditionally independent, given the target value (classification). In other words, the probability of observing $x_{1}, x_{2}, ..., x_{d}$, given the target value, is just the product of the probabilities of the individual attributes: $P(x_{1}, x_{2}, ..., x_{d} \, \vert \, y) = \prod_{i=1}^{d}P(x_{i} \, \vert \, y)$. \\
-	(b) Given a binary-class  classification  problem  in  which the  class  labels  are  binary,  the  dimension  of feature is $d$, and each attribute can take $k$ different values. Please provide the numbers of parameters to  be  estimated  with  AND  without  the  simplifying  assumption. Briefly  justify  why the  simplifying assumption is necessary. \\
+	(a) State what is the simplifying assumption made by na\"ive Bayes classifier.
 	\paragraph{}
-	Without the simplifying assumption, one has to enumerate all possible values of the input space, and for each distinct value, calculate its frequency in the training data to obtain an estimate. The problem with this is that the number of these parameters needed to be estimated is the number of target values (i.e. class labels) times the number of distinct values in the input space minus one (the last value need not be estimated since it is one subtract the sum of the others). This is a very large number of parameters to be estimated. For instance, in our situation, each $x_i$ can take $k$ different values, and there are $d$ attributes. By the multiplication rule for combinatorics, there are $k * k * \cdots * k = k^d$ distinct values of the input space. The last value need not be estimated; in fact, it is not free to vary. Thus, the number of degrees of freedom is $k^{d} - 1$. Since we must estimate this number of parameters for each class or target value, there are $2(k^{d} - 1)$ parameters to be estimated. \par
+	The simplifying assumption is that each $x_i$ of the input vector are conditionally independent, given the target value (classification). In other words, the probability of observing $x_{1}, x_{2}, ..., x_{d}$, given the target value, is just the product of the probabilities of the individual attributes: $P(x_{1}, x_{2}, ..., x_{d} \, \vert \, y) = \prod_{i=1}^{d}P(x_{i} \, \vert \, y)$. \\ \\
+	(b) Given a binary-class  classification  problem  in  which the  class  labels  are  binary,  the  dimension  of feature is $d$, and each attribute can take $k$ different values. Please provide the numbers of parameters to  be  estimated  with  AND  without  the  simplifying  assumption. Briefly  justify  why the  simplifying assumption is necessary.
+	\paragraph{}
+	Without the simplifying assumption, one has to enumerate all possible values of the input space, and for each distinct value, calculate its frequency in the training data to obtain an estimate. The problem with this is that the number of these parameters needed to be estimated is the number of target values (i.e. class labels) times the number of distinct values in the input space minus one (the last value need not be estimated since it is 1 minus the sum of the others). This is a very large number of parameters to be estimated. For instance, in our situation, each $x_i$ can take $k$ different values, and there are $d$ attributes. By the multiplication rule for combinatorics, there are $k * k * \cdots * k = k^d$ distinct values of the input space. The last value need not be estimated; in fact, it is not free to vary  at all. Thus, the number of parameters to be estimated is the number of degrees of freedom: $k^{d} - 1$. Since we must estimate this number of parameters for each class or target value, and the class labels are binary, there are $2(k^{d} - 1)$ parameters to be estimated. \par
 	On the other hand, when the simplifying assumption is made, we are able to estimate far less parameters. We need only estimate the number of target values (i.e. class labels) times the number of distinct attributes-- $2d$ in this case. \par
 	Besides the fact that this simplifying assumption significantly reduces the number of parameters to be estimated ($2(k^{d} - 1) \ll 2d$, in general), the assumption is necessary for other reasons as well. Without the assumption, the model wouldn't generalize well to unseen data. For instance, if the model hadn't seen a particular input vector in its training data, there wouldn't be a prediction at all, since $P(x \, \vert \, y_{1}) = P(x \, \vert \, y_{2})= 0$. Thus, an extremely large training data set would be needed in order for the model to function correctly. The size of the training data set $N$ would need to be much larger than $k^{d}$, which is very infeasible in reality. 
 	
@@ -157,10 +158,15 @@
 	From the classified examples in the above table, construct two decision trees (by hand) for the classification "Play Golf." For the  first tree, use Temperature as the root node. (This  is
 	a really bad  choice.) Continue the construction  of  tree  as  discussed  in  class  for  the  subsequent  nodes using information  gain. Remember  that different attributes can be used in different branches on a given level of the tree. For the second tree, follow the  Decision Tree Learning  algorithm described  in class. At  each step,  choose  the  attribute  with  the  highest information gain. Work out the computations of information gain by hand and draw the decision tree.
 	\paragraph{}
-	For the first tree, we use Temperature as the root node. As we shall see in construction of the second tree, Temperature is the worst of the four choices. Without considering the IG of the decision, we propagate examples into their respective branches. Four go to the `hot' branch; six go to the `mild' branch; four go to the `cool' branch. \par
+	For construction of the decision trees, we follow the Decision Tree Learning Algorithm. For any given node, we pick the attribute with the largest information gain (IG). If $I$ is the entropy function, then we always select the attribute $v$ such that:
+	\begin{equation*}
+	\text{Selected Attribute} = \text{max arg}_{v} \ \text{IG} = \text{max arg}_{v} \ (I_{\text{before}}-I_{\text{after}})
+	\end{equation*}
+	Note that $I_{\text{after}}$ is dependent upon $v$. \par
+	For the first tree, we are forced to use ``Temperature" as the root node. As we shall see in construction of the second tree, ``Temperature" is the worst of the four choices. Without considering the IG of the decision, we propagate examples into their respective branches. Four go to the `hot' branch; six go to the `mild' branch; four go to the `cool' branch. \par
 	Before diving into the messier branches, I will first finish the `hot' branch. If we choose ``Outlook" as the next attribute to classify by, the IG is maximized. Two examples go to the `sunny' branch (both `N'), while the other two examples go to the `overcast' branch (both `Y'). No examples are propagated to the `rain' branch, so its decision is based on the majority rule at the parent node (``Outlook" in this case). Since the split is even, we go to the next parent node up: ``Temperature." Its decision is `Y' since those account for the majority of examples. \par
-	Next, we will finish the `mild` branch stemming from the root node. The best choice is Outlook ($\text{IG}_{\text{Outlook}} = 0.126 > \text{IG}_{\text{Humidity}} = \text{IG}_{\text{Windy}} = -0.082$). Next, we note that only one instance was propagated to the `overcast' branch, so it becomes a leaf node with decision `Y'. Continuing down the `sunny' branch, we note that the ``Humidity" attribute maximizes the IG (i.e. all propagated instances belong to one class), resulting in the `normal' branch leading to a `Y' leaf node and the `high' branch leading to a `N' leaf node. Lastly, we continue down the `mild'--`rain' branch. From here, it's easy to see that the ``Windy" attribute fully segregates the classes, maximizing its IG. The `true' branch leads to a `N' leaf node, while `false' leads to a `Y' leaf node. \par
-	Finally, we finish the tree by completing the `cool' branch stemming from the root node. The best attribute choice is either ``Windy" or ``Outlook" since they have identical IGs ($\text{IG}_{\text{Outlook}} = \text{IG}_{\text{Windy}} = 0.3113 > \text{IG}_{\text{Humidity}} = 0$). We will pick ``Windy" since the result is essentially the same either way. The `false' branch leads to a `Y' leaf node, while the `true' branch leads to our last two examples (one `Y' and one `N'). From here (node located at `cool'--`true'), we select ``Outlook" as our final attribute choice since it maximizes IG. One instance is propagated to the `rain' branch (resulting in a `N' leaf node), while the other is propagated to the `overcast' branch (resulting in a `Y` leaf node). The `sunny' branch is determined by majority vote from the parent node. As before, it is undecided, so we go to the next parent node up: ``Temperature." Its decision is again `Y' since those account for the majority of examples. \par
+	Next, we will finish the `mild' branch stemming from the root node. The best choice is Outlook ($\text{IG}_{\text{Outlook}} = 0.126 > \text{IG}_{\text{Humidity}} = \text{IG}_{\text{Windy}} = -0.082$). We note that only one instance was propagated to the `overcast' branch, so it becomes a leaf node with decision `Y'. Continuing down the `sunny' branch, we note that the ``Humidity" attribute maximizes the IG (i.e. all propagated instances belong to one class), resulting in the `normal' branch leading to a `Y' leaf node and the `high' branch leading to an `N' leaf node. Lastly, we continue down the `mild'--`rain' branch. From here, it's easy to see that the ``Windy" attribute fully segregates the classes, maximizing its IG. The `true' branch leads to an `N' leaf node, while `false' leads to a `Y' leaf node. \par
+	Finally, we finish the tree by completing the `cool' branch stemming from the root node. The best attribute choice is either ``Windy" or ``Outlook" since they have identical IGs ($\text{IG}_{\text{Outlook}} = \text{IG}_{\text{Windy}} = 0.3113 > \text{IG}_{\text{Humidity}} = 0$). We will pick ``Windy" since the result is essentially the same either way. The `false' branch leads to a `Y' leaf node, while the `true' branch leads to our last two examples (one `Y' and one `N'). From here (node located at `cool'--`true'), we select ``Outlook" as our final attribute choice since it maximizes IG. One instance is propagated to the `rain' branch (resulting in an `N' leaf node), while the other is propagated to the `overcast' branch (resulting in a `Y' leaf node). The `sunny' branch is determined by majority vote from the parent node. As before, it is undecided, so we go to the next parent node up: ``Temperature." Its decision is again `Y' since those account for the majority of examples. \par
 	Finally, we construct the tree.
 	\begin{figure}[H]
 		\begin{center}
@@ -169,11 +175,7 @@
 			\label{fig:tree1}
 		\end{center}
 	\end{figure}
-	For construction of the second tree, we follow the Decision Tree Learning Algorithm. For any given node, we pick the attribute with the largest information gain (IG). If $I$ is the entropy function, then we always select the attribute $v$ such that:
-	\begin{equation*}
-	\text{Selected Attribute} = \text{max arg}_{v} \ \text{IG} = \text{max arg}_{v} \ (I_{\text{before}}-I_{\text{after}})
-	\end{equation*}
-	Note that $I_{\text{after}}$ is dependent upon $v$. Starting from the root node, we compute the selected attribute. The $IG$ is computed in the following order: Outlook, Temperature, Humidity, Windy.
+	For construction of the second tree, we follow the Decision Tree Learning Algorithm from the start. Beginning from the root node, we compute its attribute. The IG is computed in the following order: Outlook, Temperature, Humidity, Windy.
 	\begin{align*}
 	\text{Selected Attribute} &= \text{max arg}_{v} \  (1-(\frac{5}{14}I(\frac{3}{5},\frac{2}{5}) + \frac{4}{14}I(\frac{0}{4},\frac{4}{4}) + \frac{5}{14}I(\frac{2}{5},\frac{3}{5})), \\
 	&\qquad\qquad\qquad 1-(\frac{4}{14}I(\frac{1}{2},\frac{1}{2}) + \frac{6}{14}I(\frac{2}{6},\frac{4}{6}) + \frac{4}{14}I(\frac{1}{4},\frac{3}{4})), \\
@@ -182,7 +184,7 @@
 	&= \text{max arg}_{v} \ (0.3065, 0.0889, 0.2117, 0.1078) \\
 	&= \text{Outlook}
 	\end{align*}
-	As we can see, the root node will be ``Outlook." In this case, we see that if the Outlook is `overcast', the decision is always `Y.' Thus, we obtain a leaf node there. For the other two branches-- sunny and rain--, it's easy to see that maximum information gain can be obtained by using the ``Humidity" attribute on the `sunny' branch and the ``Windy" attribute on the `rain' branch. Because the information gain is maximized (i.e. all propagated instances belong to one class), there is no need to check other potential attributes. We instantly have leaf nodes. The resulting tree is below.
+	As we can see, the root node will be ``Outlook." In this case, we see that if the ``Outlook" is `overcast', the decision is always `Y.' Thus, we obtain a leaf node there. For the other two branches-- sunny and rain--, it's easy to see that maximum information gain can be obtained by using the ``Humidity" attribute on the `sunny' branch and the ``Windy" attribute on the `rain' branch. Because the information gain is maximized (i.e. all propagated instances belong to one class), there is no need to check other potential attributes. We instantly have leaf nodes. The resulting tree is below.
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[width=300pt]{hw3_ml_tree2.jpg}

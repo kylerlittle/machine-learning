@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{stmaryrd}
+\usepackage{float}
 
 \author{Kyler Little\vspace{-0.6cm}}
 \title{Homework \#3: Machine Learning\vspace{-0.3cm}}
@@ -154,9 +155,20 @@
 		\end{tabular*}
 	\end{center}
 	From the classified examples in the above table, construct two decision trees (by hand) for the classification "Play Golf." For the  first tree, use Temperature as the root node. (This  is
-	a really bad  choice.) Continue the construction  of  tree  as  discussed  in  class  for  the  subsequent  nodes using information  gain. Remember  that different attributes can be used in different branches on a given level of the tree. For the second tree, follow the  Decision Tree Learning  algorithm described  in class. At  each step,  choose  the  attribute  with  the  highest information gain. Work out the computations of information gain by hand and draw the decision tree.\\
-	
-	For the first tree, we use Temperature as the root node. As we shall see in construction of the second tree, Temperature is the worst of the three choices.
+	a really bad  choice.) Continue the construction  of  tree  as  discussed  in  class  for  the  subsequent  nodes using information  gain. Remember  that different attributes can be used in different branches on a given level of the tree. For the second tree, follow the  Decision Tree Learning  algorithm described  in class. At  each step,  choose  the  attribute  with  the  highest information gain. Work out the computations of information gain by hand and draw the decision tree.
+	\paragraph{}
+	For the first tree, we use Temperature as the root node. As we shall see in construction of the second tree, Temperature is the worst of the four choices. Without considering the IG of the decision, we propagate examples into their respective branches. Four go to the `hot' branch; six go to the `mild' branch; four go to the `cool' branch. \par
+	Before diving into the messier branches, I will first finish the `hot' branch. If we choose ``Outlook" as the next attribute to classify by, the IG is maximized. Two examples go to the `sunny' branch (both `N'), while the other two examples go to the `overcast' branch (both `Y'). No examples are propagated to the `rain' branch, so its decision is based on the majority rule at the parent node (``Outlook" in this case). Since the split is even, we go to the next parent node up: ``Temperature." Its decision is `Y' since those account for the majority of examples. \par
+	Next, we will finish the `mild` branch stemming from the root node. The best choice is Outlook ($\text{IG}_{\text{Outlook}} = 0.126 > \text{IG}_{\text{Humidity}} = \text{IG}_{\text{Windy}} = -0.082$). Next, we note that only one instance was propagated to the `overcast' branch, so it becomes a leaf node with decision `Y'. Continuing down the `sunny' branch, we note that the ``Humidity" attribute maximizes the IG (i.e. all propagated instances belong to one class), resulting in the `normal' branch leading to a `Y' leaf node and the `high' branch leading to a `N' leaf node. Lastly, we continue down the `mild'--`rain' branch. From here, it's easy to see that the ``Windy" attribute fully segregates the classes, maximizing its IG. The `true' branch leads to a `N' leaf node, while `false' leads to a `Y' leaf node. \par
+	Finally, we finish the tree by completing the `cool' branch stemming from the root node. The best attribute choice is either ``Windy" or ``Outlook" since they have identical IGs ($\text{IG}_{\text{Outlook}} = \text{IG}_{\text{Windy}} = 0.3113 > \text{IG}_{\text{Humidity}} = 0$). We will pick ``Windy" since the result is essentially the same either way. The `false' branch leads to a `Y' leaf node, while the `true' branch leads to our last two examples (one `Y' and one `N'). From here (node located at `cool'--`true'), we select ``Outlook" as our final attribute choice since it maximizes IG. One instance is propagated to the `rain' branch (resulting in a `N' leaf node), while the other is propagated to the `overcast' branch (resulting in a `Y` leaf node). The `sunny' branch is determined by majority vote from the parent node. As before, it is undecided, so we go to the next parent node up: ``Temperature." Its decision is again `Y' since those account for the majority of examples. \par
+	Finally, we construct the tree.
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=440pt]{hw3_ml_tree1.jpg}
+			\caption{Decision Tree (bad)}
+			\label{fig:tree1}
+		\end{center}
+	\end{figure}
 	For construction of the second tree, we follow the Decision Tree Learning Algorithm. For any given node, we pick the attribute with the largest information gain (IG). If $I$ is the entropy function, then we always select the attribute $v$ such that:
 	\begin{equation*}
 	\text{Selected Attribute} = \text{max arg}_{v} \ \text{IG} = \text{max arg}_{v} \ (I_{\text{before}}-I_{\text{after}})
@@ -171,7 +183,7 @@
 	&= \text{Outlook}
 	\end{align*}
 	As we can see, the root node will be ``Outlook." In this case, we see that if the Outlook is `overcast', the decision is always `Y.' Thus, we obtain a leaf node there. For the other two branches-- sunny and rain--, it's easy to see that maximum information gain can be obtained by using the ``Humidity" attribute on the `sunny' branch and the ``Windy" attribute on the `rain' branch. Because the information gain is maximized (i.e. all propagated instances belong to one class), there is no need to check other potential attributes. We instantly have leaf nodes. The resulting tree is below.
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[width=300pt]{hw3_ml_tree2.jpg}
 			\caption{Decision Tree (correct)}

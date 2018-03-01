@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.17)  27 FEB 2018 19:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.17)  28 FEB 2018 18:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -306,12 +306,12 @@ Underfull \hbox (badness 10000) in alignment at lines 139--156
 [][][][][][]
  []
 
-[5] <hw3_ml_tree1.jpg, id=27, 814.04124pt x 352.31625pt>
+[5] <hw3_ml_tree1.jpg, id=27, 834.11626pt x 352.31625pt>
 File: hw3_ml_tree1.jpg Graphic file (type jpg)
 
 <use hw3_ml_tree1.jpg>
 Package pdftex.def Info: hw3_ml_tree1.jpg used on input line 173.
-(pdftex.def)             Requested size: 440.0pt x 190.43071pt.
+(pdftex.def)             Requested size: 440.0pt x 185.85045pt.
  [6]
 <hw3_ml_tree2.jpg, id=31, 372.39125pt x 231.86626pt>
 File: hw3_ml_tree2.jpg Graphic file (type jpg)
@@ -338,7 +338,7 @@ ts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type
 c/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmsy8.pfb>
-Output written on hw3_report.pdf (8 pages, 192170 bytes).
+Output written on hw3_report.pdf (8 pages, 196178 bytes).
 PDF statistics:
  69 PDF objects out of 1000 (max. 8388607)
  47 compressed objects within 1 object stream

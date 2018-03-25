@@ -1,0 +1,60 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{float}
+
+\author{Kyler Little\vspace{-0.6cm}}
+\title{Homework \#4: Machine Learning\vspace{-0.3cm}}
+\date{March 25, 2018\vspace{-0.7cm}}
+
+\begin{document}
+	\maketitle
+	\section*{Problem \#1}
+		Exercise 8.5 \\ 
+		Show that the matrix Q described in the linear hard-margin SVM algorithm above is positive semi-definite (that is $\boldsymbol{u}^T \text{Q}\boldsymbol{u} \ge 0$ for any $\boldsymbol{u}$).
+	 
+	\section*{Problem \#2}
+	Exercise 8.11 \\
+	(a) Show that the problem in (8.21) is a standard QP-problem:
+	\begin{align*}
+	\underset{\alpha \in R^{N}}{\text{minimize}} &\qquad \frac{1}{2}\alpha^T\text{Q}_D\alpha-1_{N}^{T}\alpha \\
+	\text{subject to} & \qquad A_D\alpha \ge 0_{N+2} \\
+	\end{align*}
+	where $Q_D$ and $A_D$ ($D$ for the dual) are given by:\\
+	$Q_D = \left[
+	\begin{array}{ccc}
+		y_1y_1x_1^Tx_1&\dots&y_1y_Nx_1^Tx_N \\
+		y_2y_1x_2^Tx_1&\dots&y_2y_Nx_2^Tx_N \\
+		\vdots & \vdots & \vdots \\
+		y_Ny_1x_N^Tx_1&\dots&y_Ny_Nx_N^Tx_N \\
+	\end{array}
+	\right]$ and $A_D = \left[ 
+	\begin{array}{c}
+		y^T\\
+		-y^T\\
+		I_{N x N}\\
+	\end{array} \right]$ \\
+	(b) The matrix $Q_d$ of quadratic coefficients is $[Q_d]_{mn} = y_m y_n x^T_m x_n$.
+	Show that $Q_d = X_s X^T_s$, where $X_s$ is the `signed data matrix',\\ 
+	$X_s = \left[
+	\begin{array}{c}
+	y_1x_x^T\\
+	-y^T\\
+	I_{N x N}\\
+	\end{array} \right]$ \\
+	
+	\section*{Problem \#3}
+	Exercise 8.13 \\
+	
+	\section*{Problem \#4}
+	Problem 8.1 \\
+	
+	\section*{Problem \#5}
+	Problem 8.2 \\
+	
+	\section*{Problem \#6}
+	Problem 8.4 \\
+	
+\end{document}

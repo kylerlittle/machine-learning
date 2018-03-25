@@ -124,13 +124,13 @@
 	Thus, Q is positive semi-definite.
 	\section*{Problem \#3}
 	Exercise 8.13 \\
-	KKT complementary slackness gives that if $\alpha*n > 0$, then $(x_n , y_n)$ is on
+	KKT complementary slackness gives that if $\alpha_n^* > 0$, then $(x_n , y_n)$ is on
 	the boundary of the optimal fat-hyperplane and $y_n (w^{*T} x_n + b^{*} ) = 1$.
-	Show that the reverse is not true. Namely, it is possible that $\alpha * n=0$ and
+	Show that the reverse is not true. Namely, it is possible that $\alpha_n^* = 0$ and
 	yet $(x_n , y_n)$ is on the boundary satisfying $y_n (w^{*T} x_n + b^{*} ) = 1$.
 	[Hint: Consider a toy data set with two positive examples at (0, 0) and
-	(1, 0), and one negative example at (0,1).]
-	
+	(1, 0), and one negative example at (0, 1).] \\
+	Assuming we have that $y_n (w^{*T} x_n + b^{*} ) = 1$, we need to show that it's possible for $\alpha_n^* = 0$. We can do so by using the toy data set described in the hint. In that problem, the optimal hyperplane is $w = [0 \ -2]^T$ where $b=1$. For this case, the class labels would have to be $+1$ and $-1$. It's easy to see that the point (0, 1) is not a support vector. If we remove it, the optimal hyperplane wouldn't change. Thus, $\alpha_n^* = 0$ for that data point. All that's left to show is that $y_n (w^{*T} x_n + b^{*} ) = 1$ for all three data points. If this is the case, we have all data points lying on the boundary but one point exists with $\alpha_n^* = 0$. For (0, 0), we have $+1 ((0*0 + -2*0) + +1)=1$. For (1, 0), we have $-1 ((0*0 + -2*1) + 1)=1$. Lastly, for (1, 0), we have $-1 ((0*1 + -2*0) + 1)=1$. Thus, there exists a counterexample, so the statement cannot be true.
 	\section*{Problem \#4}
 	Problem 8.1 \\
 	Consider a data set with two data points $x_{\pm} \in R^d$ having class $\pm1$ respectively. Manually solve (8.4) by explicitly minimizing $||w||^2$.

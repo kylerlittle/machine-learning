@@ -13,7 +13,23 @@
 	\maketitle
 	\section*{Problem \#1}
 		Exercise 8.5 \\ 
-		Show that the matrix Q described in the linear hard-margin SVM algorithm above is positive semi-definite (that is $\boldsymbol{u}^T \text{Q}\boldsymbol{u} \ge 0$ for any $\boldsymbol{u}$).
+		Show that the matrix Q described in the linear hard-margin SVM algorithm above is positive semi-definite (that is $u^T \text{Q}u \ge 0$ for any $u$).\\
+		From the problem statement, $\text{Q}$ is defined to be:
+		\begin{center}
+			$\text{Q} = \left[ 
+			\begin{array}{cc}
+			0 & \boldsymbol{0}_d^T \\
+			\boldsymbol{0}_d & I_d\\
+			\end{array}
+			\right]$
+		\end{center}
+		Let $u = \{u_0 \} \times x \in R^{d+1}$, where I augment an arbitrary element $u \in R$ to $x \in R^d$. This simplifies notation a little bit. Then:
+		\begin{align*}
+			u^T\text{Q}u &= [u_0 \ x_1 \cdots \ x_d] Q [u_0 \ x_1 \cdots \ x_d]^T\\
+			&=[0 \ x_1 \cdots \ x_d] [u_0 \ x_1 \cdots \ x_d]^T\\
+			&= ||x||^2 \ge 0
+		\end{align*}
+		Thus, Q is positive semi-definite.
 	 
 	\section*{Problem \#2}
 	Exercise 8.11 \\
@@ -23,38 +39,127 @@
 	\text{subject to} & \qquad A_D\alpha \ge 0_{N+2} \\
 	\end{align*}
 	where $Q_D$ and $A_D$ ($D$ for the dual) are given by:\\
-	$Q_D = \left[
-	\begin{array}{ccc}
+	\begin{center}
+		$Q_D = \left[
+		\begin{array}{ccc}
 		y_1y_1x_1^Tx_1&\dots&y_1y_Nx_1^Tx_N \\
 		y_2y_1x_2^Tx_1&\dots&y_2y_Nx_2^Tx_N \\
 		\vdots & \vdots & \vdots \\
 		y_Ny_1x_N^Tx_1&\dots&y_Ny_Nx_N^Tx_N \\
-	\end{array}
-	\right]$ and $A_D = \left[ 
-	\begin{array}{c}
+		\end{array}
+		\right]$ and $A_D = \left[ 
+		\begin{array}{c}
 		y^T\\
 		-y^T\\
 		I_{N x N}\\
-	\end{array} \right]$ \\
-	(b) The matrix $Q_d$ of quadratic coefficients is $[Q_d]_{mn} = y_m y_n x^T_m x_n$.
+		\end{array} \right]$
+	\end{center}
+	Starting from the standard QP-problem, I will derive the original problem (8.21) to show equivalence. \\
+	Firstly, it is obvious that $-\sum_{i=1}^{N}\alpha_i = [-1\ \cdots\ -1][\alpha_1 \ \cdots \alpha_N]^T$. Next, we will show equivalence of the first terms.
+	\begin{align*}
+		\sum_{i=1}^{N}\sum_{j=1}^{N}y_i y_j \alpha_i \alpha_j x_i^T x_j &= \alpha^T \text{Q}_D \alpha \\
+		&= [\alpha_1 \ \cdots \ \alpha_N] \text{Q}_D [\alpha_1 \ \cdots \ \alpha_N]^T \\
+		&= [\sum_{i=1}^{N}\alpha_iy_iy_1x_i^Tx_1 \ \cdots \ \sum_{i=1}^{N}\alpha_iy_iy_Nx_i^Tx_N] [\alpha_1 \ \cdots \ \alpha_N]^T \\
+		&= \sum_{i=1}^{N}\sum_{j=1}^{N}y_i y_j \alpha_i \alpha_j x_i^T x_j
+	\end{align*}
+	Lastly, I'll show equivalence of the constraints.
+	\begin{center}
+		$A_D \alpha = \left[ 
+		\begin{array}{c}
+		y^T\\
+		-y^T\\
+		I_{N x N}\\
+		\end{array} \right] 
+		\left[ 
+		\begin{array}{c}
+		\alpha_1\\
+		\vdots\\
+		\alpha_N\\
+		\end{array} \right] = \left[ 
+		\begin{array}{c}
+		\sum_{i=1}^{N}y_i\alpha_i\\
+		-\sum_{i=1}^{N}y_i\alpha_i\\
+		\alpha_1\\
+		\vdots \\
+		\alpha_N\\
+		\end{array} \right] \ge 0$
+	\end{center}
+	This directly implies that $\alpha_i \ge 0, \ \forall i \in \{1,\dots,N\}$. And then only way for $\sum_{i=1}^{N}y_i\alpha_i \ge 0$ and $-\sum_{i=1}^{N}y_i\alpha_i \ge 0$ is if $\sum_{i=1}^{N}y_i\alpha_i = 0$. Thus, the problems are equivalent.
+	\\(b) The matrix $Q_d$ of quadratic coefficients is $[Q_d]_{mn} = y_m y_n x^T_m x_n$.
 	Show that $Q_d = X_s X^T_s$, where $X_s$ is the `signed data matrix',\\ 
-	$X_s = \left[
-	\begin{array}{c}
-	y_1x_x^T\\
-	-y^T\\
-	I_{N x N}\\
-	\end{array} \right]$ \\
-	
+	\begin{center}
+			$X_s = \left[
+			\begin{array}{c}
+			y_1x_1^T\\
+			y_2x_2^T\\
+			\vdots\\
+			y_Nx_N^T\\
+			\end{array} \right]$
+	\end{center}
+	Hence, show that $Q_D$ is positive semi-definite. \\
+	First, note that $X_s^T = [y_1x_1 \ \cdots \ y_Nx_N]$. From there, it is pretty easy to see that 
+		\begin{center}
+			$X_s X_s^T= \left[
+			\begin{array}{c}
+			y_1x_1^T\\
+			y_2x_2^T\\
+			\vdots\\
+			y_Nx_N^T\\
+			\end{array} \right] [y_1x_1 \ \cdots \ y_Nx_N] = \left[
+			\begin{array}{ccc}
+			y_1y_1x_1^Tx_1&\dots&y_1y_Nx_1^Tx_N \\
+			y_2y_1x_2^Tx_1&\dots&y_2y_Nx_2^Tx_N \\
+			\vdots & \vdots & \vdots \\
+			y_Ny_1x_N^Tx_1&\dots&y_Ny_Nx_N^Tx_N \\
+			\end{array}
+			\right]$
+		\end{center}
+	using basic matrix multiplication.
+	To show $Q_D$ is positive semidefinite, we first define arbitrary vector $y \in R^N$. Then, we have:
+	\begin{align*}
+		y^T \text{Q}_D y &= y^T X_sX_s^Ty \\
+		&= (X_s^Ty)^T X_s^Ty\\
+		&= ||X_s^Ty||^2 \ge 0
+	\end{align*}
+	Thus, Q is positive semi-definite.
 	\section*{Problem \#3}
 	Exercise 8.13 \\
+	KKT complementary slackness gives that if $\alpha*n > 0$, then $(x_n , y_n)$ is on
+	the boundary of the optimal fat-hyperplane and $y_n (w^{*T} x_n + b^{*} ) = 1$.
+	Show that the reverse is not true. Namely, it is possible that $\alpha * n=0$ and
+	yet $(x_n , y_n)$ is on the boundary satisfying $y_n (w^{*T} x_n + b^{*} ) = 1$.
+	[Hint: Consider a toy data set with two positive examples at (0, 0) and
+	(1, 0), and one negative example at (0,1).]
 	
 	\section*{Problem \#4}
 	Problem 8.1 \\
+	Consider a data set with two data points $x_{\pm} \in R^d$ having class $\pm1$ respectively. Manually solve (8.4) by explicitly minimizing $||w||^2$.
+	subject to the two separation constraints.
+	Compute the optimal (maximum margin) hyperplane ($b^* , w^* )$ and its margin.
+	Compare with your solution to Exercise 8.1.
 	
 	\section*{Problem \#5}
 	Problem 8.2 \\
+	Consider a data set with three data points in $R^2$: \\
+	\begin{center}
+		$X = \left[
+		\begin{array}{cc}
+		0 & 0 \\
+		0 &-1 \\
+		-2 & 0 \\
+		\end{array}
+		\right]$ and $y = \left[ 
+		\begin{array}{c}
+		-1\\
+		-1\\
+		+1\\
+		\end{array} \right]$
+	\end{center}
+	Manually solve (8.4) to get the optimal hyperplane ($b^* , w^* )$ and its margin.
 	
 	\section*{Problem \#6}
 	Problem 8.4 \\
+	Set up the dual problem for the toy data set in Exercise 8.2. Then, solve the dual problem and compute $\alpha^*$, the optimal Lagrange
+	multipliers.
 	
 \end{document}

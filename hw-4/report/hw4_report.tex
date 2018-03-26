@@ -198,8 +198,10 @@
 		$b=-0.5$
 	\end{center}
 	The dual problem is:
-	\begin{equation*}
-		\underset{w, b}{\text{min}} \ \underset{\alpha \ge 0}{\text{max}}\quad \frac{1}{2}w^T w \\
-	\end{equation*}
+	\begin{align*}
+		\underset{\alpha \ge 0}{\text{min}}\qquad &\frac{1}{2} \sum_{i=1}^{3}\sum_{j=1}^{3} y_i y_j \alpha_i \alpha_j x_i^T x_j + \sum_{i=1}^{3}\alpha_i\\
+		\text{subject to} \qquad &\sum_{i=1}^{3} \alpha_iy_i = 0
+	\end{align*}
+	Since I don't have a QP-solver and solving it by hand seemed extremely difficult, I merely used the facts that $w = \sum_{i=1}^{3} \alpha_i y_i x_i$ and $0 = \sum_{i=1}^{3} \alpha_i y_i$ to solve for each $\alpha_i$. I obtained $\alpha_1 =-0.6$, $\alpha_2 =1.6$, and $\alpha_3 =2.2$.
 	
 \end{document}

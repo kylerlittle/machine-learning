@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.17)  25 MAR 2018 17:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.17)  25 MAR 2018 18:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -296,7 +296,7 @@ Here is how much of TeX's memory you used:
  6051 multiletter control sequences out of 15000+600000
  13312 words of font info for 49 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,13n,32p,915b,214s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,13n,32p,914b,214s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texl
@@ -307,7 +307,7 @@ type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy8.pfb>
-Output written on hw4_report.pdf (4 pages, 113778 bytes).
+Output written on hw4_report.pdf (4 pages, 113765 bytes).
 PDF statistics:
  57 PDF objects out of 1000 (max. 8388607)
  40 compressed objects within 1 object stream

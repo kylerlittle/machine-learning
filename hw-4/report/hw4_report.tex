@@ -133,11 +133,16 @@
 	Assuming we have that $y_n (w^{*T} x_n + b^{*} ) = 1$, we need to show that it's possible for $\alpha_n^* = 0$. We can do so by using the toy data set described in the hint. In that problem, the optimal hyperplane is $w = [0 \ -2]^T$ where $b=1$. For this case, the class labels would have to be $+1$ and $-1$. It's easy to see that the point (0, 1) is not a support vector. If we remove it, the optimal hyperplane wouldn't change. Thus, $\alpha_n^* = 0$ for that data point. All that's left to show is that $y_n (w^{*T} x_n + b^{*} ) = 1$ for all three data points. If this is the case, we have all data points lying on the boundary but one point exists with $\alpha_n^* = 0$. For (0, 0), we have $+1 ((0*0 + -2*0) + +1)=1$. For (1, 0), we have $-1 ((0*0 + -2*1) + 1)=1$. Lastly, for (1, 0), we have $-1 ((0*1 + -2*0) + 1)=1$. Thus, there exists a counterexample, so the statement cannot be true.
 	\section*{Problem \#4}
 	Problem 8.1 \\
-	Consider a data set with two data points $x_{\pm} \in R^d$ having class $\pm1$ respectively. Manually solve (8.4) by explicitly minimizing $||w||^2$.
+	Consider a data set with two data points $x_{\pm} \in R^d$ having class $\pm1$ respectively. Manually solve (8.4) by explicitly minimizing $||w||^2$
 	subject to the two separation constraints.
 	Compute the optimal (maximum margin) hyperplane ($b^* , w^* )$ and its margin.
-	Compare with your solution to Exercise 8.1.
-	
+	Compare with your solution to Exercise 8.1. \\
+	The two separation constraints are:
+	\begin{align*}
+		w^Tx_+ + b &\ge 1 \\
+		-w^Tx_- -b &\ge 1  
+	\end{align*}
+	Combining these two constraints yields: $w^T(x_+ - x_-) \ge 2$.
 	\section*{Problem \#5}
 	Problem 8.2 \\
 	Consider a data set with three data points in $R^2$: \\
@@ -155,11 +160,46 @@
 		+1\\
 		\end{array} \right]$
 	\end{center}
-	Manually solve (8.4) to get the optimal hyperplane ($b^* , w^* )$ and its margin.
+	Manually solve (8.4) to get the optimal hyperplane $(b^* , w^* )$ and its margin. \\
+	The three constraints produced are:
+	\begin{align*}
+		-w^Tx_1 -b \ge 1 &\leftrightarrow b \le -1 \\
+		-w^Tx_2 -b \ge 1 &\leftrightarrow w_2 -b \ge 1 \\
+		w^Tx_3 +b \ge 1 &\leftrightarrow -2w_1+b \ge 1
+	\end{align*}
+	At first glance, it seems we need to make $b$ as small as possible, but this will actually make $w$ quite large. Instead, we choose $b=-1$ and sub in accordingly to get $w_1$ and $w_2$. This results in the optimal $w$ and $b$. The values are:
+	\begin{equation*}
+		(b^* , w^* ) = (-1, [-1 \ 0]^T)
+	\end{equation*}
 	
 	\section*{Problem \#6}
 	Problem 8.4 \\
 	Set up the dual problem for the toy data set in Exercise 8.2. Then, solve the dual problem and compute $\alpha^*$, the optimal Lagrange
-	multipliers.
+	multipliers. \\
+	The toy data set is:
+	\begin{center}
+		$X = \left[
+		\begin{array}{cc}
+		0 & 0 \\
+		2 &2 \\
+		2 & 0 \\
+		\end{array}
+		\right]$, $y = \left[ 
+		\begin{array}{c}
+		-1\\
+		-1\\
+		+1\\
+		\end{array} \right]$,
+		$w = \left[ 
+		\begin{array}{c}
+		1.2\\
+		-3.2\\
+		\end{array} \right]$, and 
+		$b=-0.5$
+	\end{center}
+	The dual problem is:
+	\begin{equation*}
+		\underset{w, b}{\text{min}} \ \underset{\alpha \ge 0}{\text{max}}\quad \frac{1}{2}w^T w \\
+	\end{equation*}
 	
 \end{document}

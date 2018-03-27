@@ -142,7 +142,18 @@
 		w^Tx_+ + b &\ge 1 \\
 		-w^Tx_- -b &\ge 1  
 	\end{align*}
-	Combining these two constraints yields: $w^T(x_+ - x_-) \ge 2$.
+	Combining these two constraints yields: $w^T(x_+ - x_-) \ge 2$. This can be equivalently written as:
+	\begin{equation*}
+		||w|| \frac{w^T(x_+ - x_-)}{||w||} \ge 2
+	\end{equation*}
+	Note that in the problem statement we are trying to explicitly minimize $||w||^2$; this is equivalent to minimizing $||w||$. Thus, we need to maximize $1/||w||$, or equivalently $\frac{w^T(x_+ - x_-)}{||w||}$. Since $w^T$ and $(x_+ -x_-)$ are vectors, we need to maximize their dot product. This is only possible if $w$ and $(x_+ -x_-)$ have zero angle between them. This would mean that their dot product is: $w^T(x_+ -x_-)= ||w||*||x_+ -x_-|| \cos(0)$. Since $w$ must be in the same direction as $(x_+ -x_-)$, we know then $w=\lambda (x_+ -x_-)$, where $\lambda$ is just some scalar. Subbing this in yields $\lambda \ge \frac{2}{||x_+-x_-||^2}$. Since we are minimizing $w$ and $\lambda$ is directly proportional to $w$, we must minimize $\lambda$ as well. This results in the value of $w$ being:
+	\begin{equation*}
+	w = 2 \frac{(x_+ - x_-)}{||x_+ - x_-||^2}
+	\end{equation*}
+	The magnitude of $w$ is: $||w|| = w^Tw=\frac{2}{||x_+-x_-||}$; this means that the margin is $\frac{||x_+-x_-||}{2}$, which makes sense. Lastly, $b$ is easily solved for by using either of the constraints:
+	\begin{equation*}
+		b = 1 - \frac{2||x_+||^2 - 2x_-^Tx_+}{||x_+-x_-||^2}
+	\end{equation*} 
 	\section*{Problem \#5}
 	Problem 8.2 \\
 	Consider a data set with three data points in $R^2$: \\
@@ -197,11 +208,44 @@
 		\end{array} \right]$, and 
 		$b=-0.5$
 	\end{center}
-	The dual problem is:
-	\begin{align*}
-		\underset{\alpha \ge 0}{\text{min}}\qquad &\frac{1}{2} \sum_{i=1}^{3}\sum_{j=1}^{3} y_i y_j \alpha_i \alpha_j x_i^T x_j + \sum_{i=1}^{3}\alpha_i\\
-		\text{subject to} \qquad &\sum_{i=1}^{3} \alpha_iy_i = 0
-	\end{align*}
-	Since I don't have a QP-solver and solving it by hand seemed extremely difficult, I merely used the facts that $w = \sum_{i=1}^{3} \alpha_i y_i x_i$ and $0 = \sum_{i=1}^{3} \alpha_i y_i$ to solve for each $\alpha_i$. I obtained $\alpha_1 =-0.6$, $\alpha_2 =1.6$, and $\alpha_3 =2.2$.
+	The dual problem in QP form is:
+		\begin{align*}
+		\underset{\alpha \in R^{N}}{\text{minimize}} &\qquad \frac{1}{2}\alpha^T\text{Q}_D\alpha-1_{3}^{T}\alpha \\
+		\text{subject to} & \qquad A_D\alpha \ge 0_{5} \\
+		\end{align*}
+		where $Q_D$ and $A_D$ ($D$ for the dual) are given by:\\
+		\begin{center}
+			$Q_D = \left[
+			\begin{array}{ccc}
+			0 & 0 & 0\\
+			0 & 8 & -4\\
+			0 & -4 & 4
+			\end{array}
+			\right]$ 
+			and 
+			$A_D = \left[ 
+			\begin{array}{ccc}
+			-1 & -1 & 1\\
+			1 & 1 & -1\\
+			1 & 0 & 0\\
+			0 & 1 & 0\\
+			0 & 0 & 1
+			\end{array} \right]$
+		\end{center}
+	Plugging in $Q_D$ and $A_D$ leads us to
+		\begin{align*}
+		\underset{\alpha \ge 0}{\text{minimize}} \qquad 
+		&4\alpha_2^2 - 2\alpha_2\alpha_3 + 2\alpha_3^2-\alpha_1-\alpha_2-\alpha_3\\
+		\text{subject to} \qquad -&\alpha_1-\alpha_2+\alpha_3 \ge 0\\
+		\qquad &\alpha_1+\alpha_2-\alpha_3 \ge 0 
+		\end{align*}
+	The constraints actually directly imply that $-\alpha_1-\alpha_2+\alpha_3 = 0$. I'll solve for $\alpha_3$ and eliminate the $\alpha_3$'s from the minimization problem. Once we substitute in, we get $8\alpha_2^2 +2\alpha_1\alpha_2+2\alpha_1^2-2\alpha_1-2\alpha_2$. Since we are minimizing this, we simply can take the partial derivatives and set them to zero. This gives us the values $\alpha_1 = \frac{7}{15}$ and $\alpha_2 = \frac{1}{15}$. Using the constraint yields $\alpha_3 = \frac{8}{15}$. We then plug this into $w = \sum_{i=1}^{3} \alpha_i y_i x_i$ to obtain $w$. This gives us: 
+	\begin{equation*}
+		w = \left[ 
+		\begin{array}{c}
+		-\frac{14}{15}\\
+		-\frac{2}{15}
+		\end{array} \right].
+	\end{equation*}
 	
 \end{document}

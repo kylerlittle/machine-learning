@@ -1,6 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{stmaryrd}
 \usepackage{float}
@@ -14,8 +15,21 @@
 	\section*{Problem \#1}
 	Consider two finite-dimensional feature transforms $\Phi_1$ and $\Phi_2$ and their corresponding kernels $K_1$ and $K_2$. \\
 	(a) Define $\Phi(x) = (\Phi_1(x), \Phi_2(x))$. Express the corresponding kernel of $\Phi$ in terms of $K_1$ and $K_2$. \\
+	Firstly, it's important to note that $\Phi(x)$ is also finite-dimensional since both $\Phi_1(x)$ and $\Phi_2(x)$ are finite-dimensional. Next, it's a simple matter of linear algebra to derive the kernel. \\ $K(x,x')=\Phi(x)^T\Phi(x')=\left[\begin{array}{cc}\Phi_1(x)^T&\Phi_2(x)^T\end{array}\right]\left[\begin{array}{c}\Phi_1(x') \\ \Phi_2(x')\end{array}\right] = \Phi_1(x)^T \Phi_1(x') + \Phi_2(x)^T \Phi_2(x') = K_1(x,x')+K_2(x,x')$. 
+	\\
 	(b) Consider the matrix $\Phi_1(x) \Phi_2(x)^T$ and let $\Phi(x)$ be the vector representation of the matrix (say, by concatenating all the rows). Express the corresponding kernel of $\Phi$ in terms of $K_1$ and $K_2$. \\
-	(c) Hence, show that if $K_1$ and $K_2$ are kernels, then so are $K_1 + K_2$ and $K_1 K_2$.
+	First, we need to find exactly what $\Phi$ is in this situation (i.e. what does it mean to concatenate rows). When we concatenate the rows, we simply put row 2 behind row 1, then row 3 behind row 2, and so on. We take the transpose of this vector so that it's a column vector. Now, let $u = \Phi_1$ and $v= \Phi_2$ to simplify the notation a bit. Also, assume $\Phi_1(x)$ has $n$ dimensions, and $\Phi_2(x)$ has $m$ dimensions. We have:
+	\begin{align*}
+		K(x,x') &= \Phi(x)^T\Phi(x') \\
+		&= \text{concat}(\Phi_1(x) \Phi_2(x)^T)^T \text{concat}(\Phi_1(x') \Phi_2(x')^T) \\
+		&= \text{concat}(uv^T)^T \text{concat}(u'v'^T) \\
+		&= \sum_{i=1}^{m} \sum_{j=1}^{n} u_i v_j u'_i v'_j \\
+		&= u^T u' v^T v' \\
+		&= K_1(x,x') K_2(x,x')
+	\end{align*}
+	In this case, the kernel is simply the product of the other two kernels. \\
+	(c) Hence, show that if $K_1$ and $K_2$ are kernels, then so are $K_1 + K_2$ and $K_1 K_2$. \\
+	Assume otherwise. This means that it's not possible to find kernels $K_1+K_2$ and $K_1 K_2$ such that $K_1$ and $K_2$ are both separately kernels. However, we just did that in parts (a) and (b); thus, we have a contradiction. This means the original statement must be true. $\Box$
 	
 	\section*{Problem \#2}
 	Exercise 8.16 (e-Chap:8-42) in LFD. Please ignore part (c) and only do (a), (b), (d). \\

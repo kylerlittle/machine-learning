@@ -145,7 +145,27 @@
 	The SVM's decision boundary is unaffected because the SVM only cares about support vectors (points that are on the decision boundary). In fact, non-support vectors are not even used in the calculation of the margin in SVM. Thus, SVM's decision boundary is completely unaffected by that point. On the other hand, logistic regression is still affected. This is because the goal of logistic regression is to maximize the likelihood that all points are correctly classified. Thus, it needs to take into consideration all points in order to do so. 
 	
 	\section*{Problem \#4}
-	Summarize your observations from the coding portion into a short report. In your report, please report the accuracy result and total support vector number of each model. A briefly analysis based on the results is also needed.
+	Summarize your observations from the coding portion into a short report. In your report, please report the accuracy result and total support vector number of each model. A brief analysis based on the results is also needed. \\
+	\begin{center}
+		\begin{tabular*}{340pt}[t]{c c | c c }
+			Cost Parameter & Kernel &  Support Vectors & Test Accuracy\\
+			\hline \hline
+			0.01 & Default & 1112 & 88.68\% \\
+			0.1 & Default & 424 & 95.99\% \\
+			1 & Default & 163 & 95.99\% \\
+			2 & Default & 131 & 95.99\% \\
+			3 & Default & 117 & 96.23\% \\
+			5 & Default & 104 & 96.23\% \\
+			Default & Linear & 162 & 95.99\% \\
+			Default & Polynomial & 543 & 95.52\% \\
+			Default & Radial Basis & 163 & 95.99\% \\
+		\end{tabular*}
+	\end{center}
+	\textit{Varying Cost:}
+	As the cost increases, we care more about violating the margin. In this case, we see that the number of support vectors decreases as the cost increases. On the other hand, the test accuracies increase as the cost increases. This intuitively makes sense because, as the cost increases, the soft-margin SVM increasingly resembles the hard-margin SVM. The hard-margin SVM should certainly be more accurate with linearly separable data because we emphasize or more highly value correctly classifying data points. \\
+	\textit{Varying Kernels:}
+	As for varying the kernels, all three of them achieve roughly equivalent test accuracies. However, the polynomial kernel requires 3-4x as many support vectors, which is computationally more expensive.
+	
 	
 	
 \end{document}

@@ -1,0 +1,84 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{float}
+
+\author{Kyler Little\vspace{-0.6cm}}
+\title{Homework \#6: Machine Learning\vspace{-0.3cm}}
+\date{April 20, 2018\vspace{-0.7cm}}
+
+\begin{document}
+	\maketitle
+	\section*{Problem \#1}
+	Let $A = U \Sigma V^T$ be the SVD of $A$, where $A \in R^{m\times n}$, $U \in R^{m\times m}$ and $V \in R^{n\times n}$
+	are orthogonal matrices, $\Sigma = \text{diag}(\sigma_1 , \cdots, \sigma_r, 0, \cdots, 0)$, and $r = \text{rank}(A)$. Show that: \\
+	(a) The first $r$ columns of $U$ are eigenvectors of $AA^T$ corresponding to nonzero eigenvalues.
+	(b) The first $r$ columns of $V$ are eigenvectors of $A^TA$ corresponding to nonzero eigenvalues.
+	
+	\section*{Problem \#2}
+	Given a symmetric matrix $A \in R^{3\times 3}$, suppose its eigen-decomposition can be written as:
+	\begin{equation*}
+		A =
+		\left(
+		\begin{array}{ccc}
+		u_{11} & u_{12} & u_{13} \\
+		u_{21} & u_{22} & u_{23} \\
+		u_{31} & u_{32} & u_{33}
+		\end{array}
+		\right)
+		\left(
+		\begin{array}{ccc}
+		3 & 0 & 0 \\
+		0 & -2 & 0 \\
+		0 & 0 & 1
+		\end{array}
+		\right)
+		\left(
+		\begin{array}{ccc}
+		u_{11} & u_{12} & u_{13} \\
+		u_{21} & u_{22} & u_{23} \\
+		u_{31} & u_{32} & u_{33}
+		\end{array}
+		\right)
+	\end{equation*}
+	What is the singular value decomposition of this matrix?
+		
+	\section*{Problem \#3}
+	Given a data matrix $X = \left[
+	\begin{array}{cccc}
+	x_1, & x_2, & \cdots & x_n
+	\end{array}
+	\right] \in R^{p \times n}$ consisting of $n$ data points, and each data point is $p$-dimensional, \\
+	$\bullet$ Outline the procedure for computing the PCA of X.\\
+	$\bullet$ State what is the “minimum reconstruction error” property of PCA. \\
+	$\bullet$ Prove the minimum reconstruction error property of PCA by using the best low-rank
+	approximation property of SVD.
+	
+	\section*{Problem \#4}
+	Use the similarity matrix in Table 1 to perform single
+	(MIN) and complete (MAX) link hierarchical clustering. Show your results by drawing a
+	dendrogram. The dendrogram should clearly show the order in which the points are merged.
+	\begin{table}[H]
+		\centering
+		\caption{Similarity Matrix}
+		\begin{tabular}{c|c|c|c|c|c}
+			& \textbf{p1} & \textbf{p2} & \textbf{p3} & \textbf{p4} & \textbf{p5} \\
+			\hline
+			p1 & 1.00 & 0.10 & 0.41 & 0.55 & 0.35 \\
+			p2 & 0.10 & 1.00 & 0.64 & 0.47 & 0.98 \\
+			p3 & 0.41 & 0.64 & 1.00 & 0.44 & 0.85 \\
+			p4 & 0.55 & 0.47 & 0.44 & 1.00 & 0.76 \\
+			p5 & 0.35 & 0.98 & 0.85 & 0.76 & 1.00 \\
+			\hline
+		\end{tabular}
+	\end{table}
+	
+	\section*{Problem \#5}
+	Summarize results of PCA implementation and attach images.
+	
+	
+	
+\end{document}

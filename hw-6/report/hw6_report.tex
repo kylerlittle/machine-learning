@@ -15,8 +15,26 @@
 	\section*{Problem \#1}
 	Let $A = U \Sigma V^T$ be the SVD of $A$, where $A \in R^{m\times n}$, $U \in R^{m\times m}$ and $V \in R^{n\times n}$
 	are orthogonal matrices, $\Sigma = \text{diag}(\sigma_1 , \cdots, \sigma_r, 0, \cdots, 0)$, and $r = \text{rank}(A)$. Show that: \\
-	(a) The first $r$ columns of $U$ are eigenvectors of $AA^T$ corresponding to nonzero eigenvalues.
-	(b) The first $r$ columns of $V$ are eigenvectors of $A^TA$ corresponding to nonzero eigenvalues.
+	(a) The first $r$ columns of $U$ are eigenvectors of $AA^T$ corresponding to nonzero eigenvalues. \\
+	\begin{align*}
+		AA^T &= U\Sigma V^T (U\Sigma V^T)^T \\
+		&= U\Sigma V^T (V^T)^T\Sigma^T U^T \\
+		&= U\Sigma \Sigma^T U^T \\
+		&= U \left[\begin{array}{cc}
+		\Sigma^{*2} & 0 \\
+		0 & 0
+		\end{array}\right] U^T
+	\end{align*}
+	Note that $\Sigma^{*2} = \text{diag}(\sigma_1^2 , \cdots, \sigma_r^2)$, and the transition from the second step to the third occurs because $V$ is an orthonormal matrix. Because $AA^T$ is symmetric (true for any matrix $A$), we see that the final equation is actually the eigen decomposition of $AA^T$. Therefore, the columns of $U$ are the eigenvectors of $AA^T$. Clearly, only the first $r$ columns of $U$ can possibly correspond to nonzero eigenvalues since the remaining diagonal entries of $\Sigma^2$ are zeros. But to prove this, we must show $(AA^T)_r$ is positive definite. This is relatively easy, using the knowledge of past homeworks. Given any $x \in R^r \ \text{s.t.}\  x \ne 0$, we have that $x^T(AA^T)_r x=(A^T x)^T A^T x = ||A^T x||^2 > 0$ for nonzero $x$. Therefore, we have that the eigenvalues of $(AA^T)_r$ are all positive and nonzero, so we are done.
+	\\ \\
+	(b) The first $r$ columns of $V$ are eigenvectors of $A^TA$ corresponding to nonzero eigenvalues. \\
+	\begin{align*}
+	A^T A &= (U\Sigma V^T)^T U\Sigma V^T \\
+	&= (V^T)^T\Sigma^T U^T U\Sigma V^T \\
+	&= V\Sigma^T \Sigma V^T \\
+	&= V \Sigma^{*2} V^T
+	\end{align*}
+	As we can see, a nearly identical argument can be made for this case. Clearly, the last equation is an eigen decomposition for $A^TA$. It only needs to be proved that the diagonal entries of $\Sigma^{*2}$ are strictly positive. Similar to the part (a), we have that given any $x \in R^r \ \text{s.t.}\  x \ne 0$, $x^T(A^TA)_r x=(Ax)^T Ax = ||Ax||^2 > 0$ for nonzero $x$. Therefore, we have that the eigenvalues of $(A^TA)_r$ are all positive and nonzero, so we are done once more.
 	
 	\section*{Problem \#2}
 	Given a symmetric matrix $A \in R^{3\times 3}$, suppose its eigen-decomposition can be written as:
@@ -38,14 +56,40 @@
 		\right)
 		\left(
 		\begin{array}{ccc}
-		u_{11} & u_{12} & u_{13} \\
-		u_{21} & u_{22} & u_{23} \\
-		u_{31} & u_{32} & u_{33}
+		u_{11} & u_{21} & u_{31} \\
+		u_{12} & u_{22} & u_{32} \\
+		u_{13} & u_{23} & u_{33}
 		\end{array}
 		\right)
 	\end{equation*}
 	What is the singular value decomposition of this matrix?
-		
+	\\
+	Firstly, note that the decomposition is already quite close to the SVD. The only issue is that $-2$ should be positive, but otherwise, the magnitudes of the eigenvalues are nonincreasing and all greater than zero. Thus, a nice trick we can apply is to note that $AA^T=U\Lambda U^T U\Lambda U^T = U \Lambda^2 U^T$ (recall $U^T U = I$ and $\Lambda$ is a diagonal matrix), which is a singular value decomposition of $A A^T$. Because $A$ is symmetric, we have that $A^T A = AA^T$. Knowing this, we can see that the only thing that changes between the eigen-decomposition for $A$ and the SVD for $A A^T$ is actually the central matrix ($\Lambda \ \text{versus}\  \Lambda^2$). Thus, to obtain the SVD for $A$, we must ensure that the sign of the singular values is kept positive. We can do this by putting the sign of each eigenvalue on to the corresponding column vector in $U$ and then making all eigenvalues positive by taking their absolute values. In other words, let $A=\sum_{i=1}^{3}\text{sign}(\lambda_i)u_i |\lambda_i|u^T$.
+	Therefore, the SVD for $A$ is:
+	\begin{equation*}
+	A =
+	\left(
+	\begin{array}{ccc}
+	u_{11} & -u_{12} & u_{13} \\
+	u_{21} & -u_{22} & u_{23} \\
+	u_{31} & -u_{32} & u_{33}
+	\end{array}
+	\right)
+	\left(
+	\begin{array}{ccc}
+	3 & 0 & 0 \\
+	0 & 2 & 0 \\
+	0 & 0 & 1
+	\end{array}
+	\right)
+	\left(
+	\begin{array}{ccc}
+	u_{11} & u_{21} & u_{31} \\
+	u_{12} & u_{22} & u_{32} \\
+	u_{13} & u_{23} & u_{33}
+	\end{array}
+	\right)
+	\end{equation*}
 	\section*{Problem \#3}
 	Given a data matrix $X = \left[
 	\begin{array}{cccc}

@@ -97,9 +97,14 @@
 	\end{array}
 	\right] \in R^{p \times n}$ consisting of $n$ data points, and each data point is $p$-dimensional, \\
 	$\bullet$ Outline the procedure for computing the PCA of X.\\
+	PCA is a strategy for reducing the dimension of data through the reduction of features (rather than feature selection). The strategy to do this, at a high level viewpoint, is to simply use a linear transformation on each data point to produce a ``reduced" data point with fewer dimensions (but roughly the same qualities). The important part of PCA is in how it determines to transform each data point. PCA does this by computing the eigenvectors of the covariance matrix of the input data matrix. But before getting into the mechanics of this, I will establish some notation. Given input data matrix $X \in R^{p \times N}$, we would like to reduce the dimensionality of each column of $X$ to $d$ (from $p$). We can do this via a linear transformation $G \in R^{p \times d}: X \rightarrow Z = G^T X \in R^{d \times N}$, where $Z$ is the transformed input data matrix. Now, we can begin to discuss the mechanics. If the first $d$ eigenvectors form matrix $U_d$, then the matrix product $U_d^T X$ will produce the transformed input data matrix. To find the eigenvectors, we first need the matrix itself. The covariance matrix of $X$ is simply $\frac{1}{2}\tilde{X}\tilde{X}^T$, where $\tilde{X}=X-\bar{x}1_{1\times N}$ and $\bar{x} = \frac{1}{N}\sum_{i=1}^{N} x_i$ (note that $x_i$ is the $i$th column vector of X). To compute $\tilde{X}$'s eigenvectors, we compute its SVD: $\text{SVD}(\tilde{X}) = U\Sigma V^T$. Now, we simply take the first $d$ columns of $U$, and let these form the matrix $G$, and we are done. We now have $G$ such that $G^T X = Z \in R^{d \times N}$.
+	\\
 	$\bullet$ State what is the “minimum reconstruction error” property of PCA. \\
+	The minimum reconstruction error property states that the PCA minimizes the error in reconstructing a matrix from its reduced form (i.e. no better method exists). In mathematical terms, PCA minimizes the Frobenius norm of $X - GG^T X$.
+	\\
 	$\bullet$ Prove the minimum reconstruction error property of PCA by using the best low-rank
-	approximation property of SVD.
+	approximation property of SVD. \\
+	Basically what we need to show is that $GG^T X$ is equal to the best low-rank approximation of $X$, and this will suffice.
 	
 	\section*{Problem \#4}
 	Use the similarity matrix in Table 1 to perform single

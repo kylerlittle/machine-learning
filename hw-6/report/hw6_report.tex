@@ -104,7 +104,7 @@
 	\\
 	$\bullet$ Prove the minimum reconstruction error property of PCA by using the best low-rank
 	approximation property of SVD. \\
-	Basically what we need to show is that $GG^T X$ is equal to the best low-rank approximation of $X$, and this will suffice.
+	Basically what we need to show is that $GG^T X$ is equal to the best $d$-rank approximation of $X$, and this will suffice.
 	
 	\section*{Problem \#4}
 	Use the similarity matrix in Table 1 to perform single
@@ -124,7 +124,11 @@
 			\hline
 		\end{tabular}
 	\end{table}
-	
+	MIN: Clearly in the first round, we merge $p2$ and $p5$ since these are the closest. Then we merge $p2/p5$ and $p3$. Next, we merge $p2/p3/p5$ and $p4$. Lastly, we merge $p2/p3/p4/p5$ and $p1$.
+	\\
+	MAX: Weirdly enough, this actually produces the same results. We obviously have the same starting merge ($p2$ and $p5$) since this merge would have the smallest diameter. The next merge with the smallest diameter is: $p2/p5$ and $p3$, with diameter $1.00-0.64$. The other options would have been $p2/p5$ and $p1$ with diameter $1.00-0.10$, $p2/p5$ and $p4$ with diameter $1.00-0.47$, $p1$ and $p4$ with diameter $1.00-0.55$, $p1$ and $p3$ with diameter $1.00-0.41$, or $p4$ and $p3$ with diameter $1.00-0.44$. We can follow a similar process to determine the last two merges. This results in the exact same merges as the MIN method.
+	\\
+	Since the merges are identical, I drew only one diagram.
 	\section*{Problem \#5}
 	Summarize results of PCA implementation and attach images.
 	

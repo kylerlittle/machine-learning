@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{subfig}
 \usepackage{stmaryrd}
 \usepackage{float}
 
@@ -104,8 +105,8 @@
 	\\
 	$\bullet$ Prove the minimum reconstruction error property of PCA by using the best low-rank
 	approximation property of SVD. \\
-	Basically what we need to show is that $GG^T X$ is equal to the best $d$-rank approximation of $X$, and this will suffice.
-	
+	Basically what we need to show is that $GG^T X$ is equal to the best $d$-rank approximation of $X$, and this will suffice. To start, note that $GG^TX = U_dU_d^TX$, meaning that we are trying to prove that $U_dU_d^TX = U_d\Sigma_dV_d^T$. 
+	First, we note that $X$ can be represented by SVD: $X=U\Sigma V^T$, so we substitute this in. Therefore, $U_dU_d^TX = U_dU_d^T U\Sigma V^T$. Next we note that $U_d^TU=I_{d \times N}$, since $U$ and all of its submatrices (by column) are orthonormal. Thus, we now have $U_d I_{d \times N} (\Sigma V^T)$, which equals $U_d\Sigma_dV_d^T$, and we are done.
 	\section*{Problem \#4}
 	Use the similarity matrix in Table 1 to perform single
 	(MIN) and complete (MAX) link hierarchical clustering. Show your results by drawing a
@@ -129,9 +130,39 @@
 	MAX: Weirdly enough, this actually produces the same results. We obviously have the same starting merge ($p2$ and $p5$) since this merge would have the smallest diameter. The next merge with the smallest diameter is: $p2/p5$ and $p3$, with diameter $1.00-0.64$. The other options would have been $p2/p5$ and $p1$ with diameter $1.00-0.10$, $p2/p5$ and $p4$ with diameter $1.00-0.47$, $p1$ and $p4$ with diameter $1.00-0.55$, $p1$ and $p3$ with diameter $1.00-0.41$, or $p4$ and $p3$ with diameter $1.00-0.44$. We can follow a similar process to determine the last two merges. This results in the exact same merges as the MIN method.
 	\\
 	Since the merges are identical, I drew only one diagram.
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=300pt]{dendrogram.jpg}
+			\caption{The resulting dendrogram using single and complete hierarchical clustering}
+			\label{fig:dendro}
+		\end{center}
+	\end{figure}
 	\section*{Problem \#5}
-	Summarize results of PCA implementation and attach images.
-	
+	Summarize results of PCA implementation and attach images. \\
+	In the coding portion, we use PCA on a set of images of handwritten digits-- the same dataset as in past assignments. This, of course, reduces the dimension of the images; then we reconstruct the original images using the best low-rank approximation of each image for varying ranks (10, 50, 100, 200). The results are displayed for two particular images in Figures 2 and 3 below.
+	\begin{figure}[H]
+		\centering
+		\subfloat[10 principal components]{{\includegraphics[width=6cm]{img1_comp10.png} }}
+		\subfloat[50 principal components]{{\includegraphics[width=6cm]{img1_comp50.png} }}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\subfloat[100 principal components]{{\includegraphics[width=6cm]{img1_comp100.png} }}
+		\subfloat[200 principal components]{{\includegraphics[width=6cm]{img1_comp200.png} }}
+		\caption{Using PCA, we reconstruct the original image using the stated number of principal components.}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\subfloat[10 principal components]{{\includegraphics[width=6cm]{img2_comp10.png} }}
+		\subfloat[50 principal components]{{\includegraphics[width=6cm]{img2_comp50.png} }}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\subfloat[100 principal components]{{\includegraphics[width=6cm]{img2_comp100.png} }}
+		\subfloat[200 principal components]{{\includegraphics[width=6cm]{img2_comp200.png} }}
+		\caption{Using PCA, we reconstruct the original image using the stated number of principal components.}
+	\end{figure}
+	As we can see from the figures, the quality of the reconstruction increases as the number of principal components is increased. This makes sense because we're not removing as many dimensions from our data. However, it's important to note that even the extremely low-rank approximations of the images are still quite good. It's still nearly possible to tell which digits the images represent, despite transforming to extremely low dimension and then back.
 	
 	
 \end{document}

@@ -14,43 +14,40 @@ In this assignment, you may want to use following helper functions:
 
 '''
 def pca(A, p):
-	'''
-	Principal component analysis function.
-
-	Args:
-	A: the data with shape (3000, 256). 3000 is the total number of samples and 256 is the total features/values of each sample.
-	p: the number of principal components. A scatter number.
-
-	Returns:
-	U_p: 'p' principal components with shape (256, p).
-	A1: The reduced data matrix after PCA with shape (p, 3000).
-	'''
-	pass
+        '''
+        Principal component analysis function.
+        Args:
+        A: the data with shape (3000, 256). 3000 is the total number of samples and 256 is the total features/values of each sample.
+        p: the number of principal components. A scatter number.
+        Returns:
+        U_p: 'p' principal components with shape (3000, p).
+        A1: The reduced data matrix after PCA with shape (p, 3000).
+        '''
+        a_bar = np.mean(A, axis=0).reshape(1, A.shape[1])
+        centered = A - np.dot(np.ones((A.shape[0], 1)), a_bar)
+        u, s, vh = np.linalg.svd(centered)
+        return (u[:,:p], np.dot(np.transpose(u[:,:p]), A))
 
 
 def reconstruction(U, A1):
-	'''
-	Reconstruct data function.
-
-	Args:
-	U: 'p' principal components with shape (256, p).
-	A1: The reduced data matrix after PCA with shape (p, 3000).
-
-	Return:
-	Re_A: The reconstructed matrix with shape (3000, 256)
-	'''
-	pass
+        '''
+        Reconstruct data function.
+        Args:
+        U: 'p' principal components with shape (3000, p).
+        A1: The reduced data matrix after PCA with shape (3000, p).
+        Return:
+        Re_A: The reconstructed matrix with shape (3000, 256)
+        '''
+        return np.dot(U, A1)
 
 
 def reconstruct_error(A, B):
-	'''
-	reconstruction error function.
-
-	Args: 
-	A & B: Two matrices needed to be compared with shape (3000, 256).
-
-	Return: 
-	error: the Frobenius norm's square of the matrix A-B. A scatter number.
-	'''
-	pass
+        '''
+        reconstruction error function.
+        Args: 
+        A & B: Two matrices needed to be compared with shape (3000, 256).
+        Return: 
+        error: the Frobenius norm's square of the matrix A-B. A scatter number.
+        '''
+        return np.linalg.norm(A-B, 'fro')**2
 

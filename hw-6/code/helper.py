@@ -12,5 +12,5 @@ def show_images(data, p, i):
 	fig = plt.figure()
 	data = data
 	plt.imshow(data[i,:].reshape((16,16)))
-	fig.savefig('Reconstructed images%d with %d component'%(i,p))
+	fig.savefig('img%d_comp%d'%(i,p))
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.17)  25 APR 2018 15:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.17)  25 APR 2018 20:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -150,6 +150,39 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen120
 \Gin@req@width=\dimen121
 )
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen122
+\captionmargin@=\dimen123
+\captionwidth=\dimen124
+\caption@tempdima=\dimen125
+\caption@indent=\dimen126
+\caption@parindent=\dimen127
+\caption@hangindent=\dimen128
+)
+\c@ContinuedFloat=\count103
+)
+\c@KVtest=\count104
+\sf@farskip=\skip46
+\sf@captopadj=\dimen129
+\sf@capskip=\skip47
+\sf@nearskip=\skip48
+\c@subfigure=\count105
+\c@subfigure@save=\count106
+\c@lofdepth=\count107
+\c@subtable=\count108
+\c@subtable@save=\count109
+\c@lotdepth=\count110
+\sf@top=\skip49
+\sf@bottom=\skip50
+)
 (/usr/share/texlive/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
 Package: stmaryrd 1994/03/03 St Mary's Road symbol package
 \symstmry=\mathgroup6
@@ -158,7 +191,7 @@ LaTeX Font Info:    Overwriting symbol font `stmry' in version `bold'
 )
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count103
+\c@float@type=\count111
 \float@exts=\toks21
 \float@box=\box28
 \@float@everytoks=\toks22
@@ -166,18 +199,18 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 ) (./hw6_report.aux)
 \openout1 = `hw6_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -215,16 +248,16 @@ LaTeX Font Info:    ... okay on input line 13.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count104
-\scratchdimen=\dimen122
+\scratchcounter=\count112
+\scratchdimen=\dimen130
 \scratchbox=\box30
-\nofMPsegments=\count105
-\nofMParguments=\count106
+\nofMPsegments=\count113
+\nofMParguments=\count114
 \everyMPshowfont=\toks23
-\MPscratchCnt=\count107
-\MPscratchDim=\dimen123
-\MPnumerator=\count108
-\makeMPintoPDFobject=\count109
+\MPscratchCnt=\count115
+\MPscratchDim=\dimen131
+\MPnumerator=\count116
+\makeMPintoPDFobject=\count117
 \everyMPtoPDFconversion=\toks24
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -270,30 +303,34 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 14.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Try loading font information for U+msa on input line 15.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 14.
+LaTeX Font Info:    Try loading font information for U+msb on input line 15.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+stmry on input line 14.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 15.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-Underfull \hbox (badness 10000) in paragraph at lines 16--19
+Underfull \hbox (badness 10000) in paragraph at lines 17--20
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 27--31
+Underfull \hbox (badness 10000) in paragraph at lines 28--32
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 27--31
+Underfull \hbox (badness 10000) in paragraph at lines 28--32
 
  []
 
@@ -306,29 +343,86 @@ Missing character: There is no ú in font cmr12!
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ù in font cmr12!
- [2] [3]
-(./hw6_report.aux) ) 
+ [2]
+<dendrogram.jpg, id=18, 2792.4325pt x 1637.11626pt>
+File: dendrogram.jpg Graphic file (type jpg)
+ <use dendrogram.jpg>
+Package pdftex.def Info: dendrogram.jpg used on input line 135.
+(pdftex.def)             Requested size: 300.0pt x 175.86166pt.
+
+[3] <img1_comp10.png, id=22, 462.528pt x 346.896pt>
+File: img1_comp10.png Graphic file (type png)
+ <use img1_comp10.png>
+Package pdftex.def Info: img1_comp10.png used on input line 145.
+(pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
+
+<img1_comp50.png, id=24, 462.528pt x 346.896pt>
+File: img1_comp50.png Graphic file (type png)
+ <use img1_comp50.png>
+Package pdftex.def Info: img1_comp50.png used on input line 146.
+(pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
+
+<img1_comp100.png, id=25, 462.528pt x 346.896pt>
+File: img1_comp100.png Graphic file (type png)
+ <use img1_comp100.png>
+Package pdftex.def Info: img1_comp100.png used on input line 150.
+(pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
+
+<img1_comp200.png, id=26, 462.528pt x 346.896pt>
+File: img1_comp200.png Graphic file (type png)
+ <use img1_comp200.png>
+Package pdftex.def Info: img1_comp200.png used on input line 151.
+(pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
+
+<img2_comp10.png, id=27, 462.528pt x 346.896pt>
+File: img2_comp10.png Graphic file (type png)
+ <use img2_comp10.png>
+Package pdftex.def Info: img2_comp10.png used on input line 156.
+(pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
+
+<img2_comp50.png, id=28, 462.528pt x 346.896pt>
+File: img2_comp50.png Graphic file (type png)
+ <use img2_comp50.png>
+Package pdftex.def Info: img2_comp50.png used on input line 157.
+(pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
+ [4 <./dendrogram.jpg> <./img1_comp10.png> <./img1_comp50.png>]
+<img2_comp100.png, id=35, 462.528pt x 346.896pt>
+File: img2_comp100.png Graphic file (type png)
+ <use img2_comp100.png>
+Package pdftex.def Info: img2_comp100.png used on input line 161.
+(pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
+
+<img2_comp200.png, id=36, 462.528pt x 346.896pt>
+File: img2_comp200.png Graphic file (type png)
+ <use img2_comp200.png>
+Package pdftex.def Info: img2_comp200.png used on input line 162.
+(pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
+
+[5 <./img1_comp100.png> <./img1_comp200.png> <./img2_comp10.png> <./img2_comp50
+.png> <./img2_comp100.png> <./img2_comp200.png>] [6] (./hw6_report.aux) ) 
 Here is how much of TeX's memory you used:
- 3076 strings out of 494953
- 40944 string characters out of 6180977
- 111149 words of memory out of 5000000
- 6312 multiletter control sequences out of 15000+600000
+ 4325 strings out of 494953
+ 63357 string characters out of 6180977
+ 136030 words of memory out of 5000000
+ 7540 multiletter control sequences out of 15000+600000
  13320 words of font info for 53 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,14n,32p,1604b,236s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cme
-x10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on hw6_report.pdf (3 pages, 104523 bytes).
+ 44i,14n,49p,1604b,358s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+8.pfb>
+Output written on hw6_report.pdf (6 pages, 847322 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 81 PDF objects out of 1000 (max. 8388607)
+ 45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
